@@ -1,4 +1,4 @@
-% Created 2013-12-26 Thu 10:41
+% Created 2013-12-26 Thu 11:58
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -19,6 +19,7 @@
 \usepackage[cm]{fullpage}
 \pagestyle{empty}
 \thispagestyle{empty}
+\DeclareUnicodeCharacter{00A0}{~}
 \author{Ethan Brown}
 \date{\today}
 \title{Goals 2013 Descriptives}
@@ -29,11 +30,11 @@
 \begin{document}
 
 \maketitle
+
 \section*{Setup}
 \label{sec-1}
 <<>>=
-setwd("/home/fortis/goals-2013/")
-goalsp.raw <- read.csv("data-in/GOALS-DEIDENTIFIED-2013-12-20.csv")
+goalsp.raw <- read.csv("/home/fortis/goals-2013/data-in/GOALS-DEIDENTIFIED-2013-12-20.csv")
 
 ## Exclude non-consenting
 summary(factor(goalsp.raw$consent)) ## no missing values; 38 nonconsenting, 1165 consenting
@@ -46,7 +47,7 @@ table(goalsp.trim$missing)
 @ %def
 \section*{Overall summary}
 \label{sec-3}
-<<>>=
+<<fig=TRUE>>=
 goalsp.trim$pcorrect <- goalsp.trim$total.correct/23
 summary(goalsp.trim$pcorrect)
 summary(goalsp.trim$total.correct)

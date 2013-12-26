@@ -4,7 +4,8 @@
 #+LaTex_HEADER: \usepackage[cm]{fullpage}
 #+LaTex_HEADER: \pagestyle{empty}
 #+LaTex_HEADER: \thispagestyle{empty}
-#+LaTex_HEADER: \usepackage[utf8x]{inputenc}
+#+LaTex_HEADER: \DeclareUnicodeCharacter{00A0}{~}
+
 * Setup
 #+BEGIN_SRC R
   goalsp.raw <- read.csv("/home/fortis/goals-2013/data-in/GOALS-DEIDENTIFIED-2013-12-20.csv")
@@ -20,7 +21,7 @@ table(goalsp.trim$missing)
 #+END_SRC
 
 * Overall summary
-#+BEGIN_SRC R
+#+BEGIN_SRC R :ravel fig=TRUE
   goalsp.trim$pcorrect <- goalsp.trim$total.correct/23
   summary(goalsp.trim$pcorrect)
   summary(goalsp.trim$total.correct)
