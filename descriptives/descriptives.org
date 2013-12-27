@@ -90,14 +90,14 @@ Bivariate correlations seem generally quite low.  The mean/median item (q07) has
 
 The Alice testlet seems to pop out quite separately from the other items... we may be getting a very different group of students who do well on the Alice items than the others (but this conclusion should be taken with caution as it's based only on bivariate correlations).  It would be interesting to do some principle components on this.
 fdjksalf
-#+BEGIN_SRC R :ravel percentCorrect,fig=TRUE,width=8
+#+BEGIN_SRC R :ravel percentCorrect,fig=TRUE,width=9, height=6
   library(ggplot2)
   
   pc <- colMeans(gp.rw, na.rm = T)
   round(pc, 2)
   
   names(pc) <- 1:23
-  barplot(pc)
+  barplot(pc, las = 2)
   
 #+END_SRC
 
