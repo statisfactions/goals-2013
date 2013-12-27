@@ -1,4 +1,4 @@
-% Created 2013-12-26 Thu 21:53
+% Created 2013-12-26 Thu 22:43
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -34,6 +34,8 @@
 \section{Setup}
 \label{sec-1}
 <<setup>>=
+library(car)
+
 gp.raw <- read.csv("/home/fortis/goals-2013/data-in/GOALS-DEIDENTIFIED-2013-12-20.csv")
 
 ## Exclude non-consenting
@@ -43,10 +45,28 @@ gp <- gp.raw[ gp.raw$consent == 1, ] ## 2 = non-consenting
 ## Replace response numeric codes with factors for reasonable summarizing
 responsecols <- grep("^q..$", names(gp), value = T)
 gp[,responsecols] <- lapply(gp[,responsecols], factor)
+
+rwcols <- paste0(responsecols, ".rw")
+gp.rw <- gp[, rwcols]
 @ %def
 
 <<>>=
 ## Add response options
+
+## sampling items
+gp$q06 <- factor(gp$q06, labels = c("Valid", "Invalid"))
+gp$q09 <- factor(gp$q09, labels = c("Same", "Small n is wider", "Large n is wider"))
+gp$q13 <- factor(gp$q13, labels = c("Small n is wider", "Large n is wider", "Same"))
+gp$q23 <- factor(gp$q23, labels = c("Smaller than original", "Same as original", "Larger than original"))
+
+## center items
+gp$q10 <- factor(gp$q10, labels = c("Standard medication", "New medication", "Neither"))
+gp$q11 <- factor(gp$q11, labels = c("Smaller difference", "Larger difference", "Same evidence"))
+
+## Variability items
+
+gp$q08 <- factor(gp$q08, labels = c("Uniform", "Unimodal", "Neither"))
+gp$q12 <- factor(gp$q12, labels = c("Smaller variability", "Larger variability", "Same evidence"))
 @ %def
 
 \section{Missing values}
@@ -99,6 +119,11 @@ hist(gp$pcorrect, breaks = seq(0, 1, length.out = 24))
 23 & Able to reason about how increasing the sample size affects the p-value, all else being equal.\\
 \end{tabular}
 \end{center}
+
+<<corrgram,fig=TRUE>>=
+library(corrgram)
+corrgram(gp.rw, cex.labels = 1.5, lower.panel = panel.shade, upper.panel = panel.pie)
+@ %def
 \subsection{Sample size}
 \label{sec-4-2}
 \begin{center}
@@ -107,13 +132,13 @@ hist(gp$pcorrect, breaks = seq(0, 1, length.out = 24))
 \hline
 6 & Herbicide: sample size may be why not significant\\
 9 & Candies problem (visual)\\
-12 & CI/Sample size\\
+13 & CI/Sample size\\
 23 & Increase in sample size -> p-value\\
 \end{tabular}
 \end{center}
 
 <<sample.size>>=
-samps <- c("q06", "q09", "q12", "q23")
+samps <- c("q06", "q09", "q13", "q23")
 samps.rw <- paste0(samps, ".rw")
 
 summary(gp[,sort(c(samps, samps.rw))])
