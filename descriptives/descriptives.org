@@ -8,58 +8,80 @@
 
 * Setup
 #+BEGIN_SRC R
-  goalsp.raw <- read.csv("/home/fortis/goals-2013/data-in/GOALS-DEIDENTIFIED-2013-12-20.csv")
+  gp.raw <- read.csv("/home/fortis/goals-2013/data-in/GOALS-DEIDENTIFIED-2013-12-20.csv")
   
   ## Exclude non-consenting
-  summary(factor(goalsp.raw$consent)) ## no missing values; 38 nonconsenting, 1165 consenting
-  goalsp.trim <- goalsp.raw[ goalsp.raw$consent == 1, ] ## 2 = non-consenting
+  summary(factor(gp.raw$consent)) ## no missing values; 38 nonconsenting, 1165 consenting
+  gp <- gp.raw[ gp.raw$consent == 1, ] ## 2 = non-consenting
 #+END_SRC
 
 * Missing values
 #+BEGIN_SRC R
-table(goalsp.trim$missing)
+table(gp$missing)
 #+END_SRC
 
 * Overall summary
 #+BEGIN_SRC R :ravel fig=TRUE
-  goalsp.trim$pcorrect <- goalsp.trim$total.correct/23
-  summary(goalsp.trim$pcorrect)
-  summary(goalsp.trim$total.correct)
-  tb <- table(goalsp.trim$total.correct)
+  gp$pcorrect <- gp$total.correct/23
+  summary(gp$pcorrect)
+  summary(gp$total.correct)
+  tb <- table(gp$total.correct)
   
   
-  hist(goalsp.trim$pcorrect, breaks = seq(0, 1, length.out = 24))
+  hist(gp$pcorrect, breaks = seq(0, 1, length.out = 24))
 #+END_SRC
 
 * Index of items
 
-| Item | Measured Learning Goal                                                                                                                                                                                                                                    |
-|    1 | Able to reason about the purpose of random assignment                                                                                                                                                                                                     |
-|    2 | Able to reason about the factors that allow a sample of data to be representative of the population.                                                                                                                                                      |
-|    3 | Able to reason about how correlation does not imply causation.                                                                                                                                                                                            |
-|    4 | Able to reason about the impact of removing an influential point  from a scatterplot on the correlation coefficient                                                                                                                                       |
-|    5 | Able to reason about the effect of  moving an influential point to a new location on the correlation coefficient                                                                                                                                          |
-|    6 | Able to reason about the relationship between sample size and statistical significance                                                                                                                                                                    |
-|    7 | Able to reason that no statistical significance does not guarantee that there is no effect.                                                                                                                                                               |
-|    8 | Able to reason about factors that affect the mean and median                                                                                                                                                                                              |
-|    9 | Able to reason that given two distributions that have the same range, the one with less mass in the center has the larger standard deviation (tests for misconception that a uniform distribution has less "variability" than a non-uniform distribution) |
-|   10 | Able to reason about differences between empirical sampling distributions for large and small sample sizes.                                                                                                                                               |
-|   11 | Able to reason about how to judge differences when visually comparing two samples of data.                                                                                                                                                                |
-|   12 | Able to reason about how differences in center and in variability affect strength of evidence against the null hypothesis of no difference                                                                                                                |
-|   13 | Able to reason about how the width of a confidence interval is related to sample size.                                                                                                                                                                    |
-|   14 | Able to reason about how the width of a confidence interval is related to level of confidence.                                                                                                                                                            |
-|   15 | Able to reason about a misinterpretation of a confidence level (the range of observed values for individual observational units or cases)                                                                                                                 |
-|   16 | Able to reason about a misinterpretation of a confidence level (using it to make a prediction for a single case)                                                                                                                                          |
-|   17 | Able to reason about what the null model represents in a research study                                                                                                                                                                                   |
-|   18 | Able to reason about what model should be used for the null hypothesis when comparing two groups                                                                                                                                                          |
-|   19 | Able to reason about how to find a p-value based on simulation results.                                                                                                                                                                                   |
-|   20 | Able to reason about the relationship between the p-value and the null hypothesis.                                                                                                                                                                        |
-|   20 | Able to reason about a conclusion based on a statistically significant p-value in the context of a research study that compares two groups                                                                                                                |
-|   21 | Able to reason about an incorrect interpretation of a p-value (probability of a treatment being less effective).                                                                                                                                          |
-|   22 | Able to reason about an incorrect interpretation of a p-value (probability of a treatment being more effective).                                                                                                                                          |
-|   23 | Able to reason about the correct interpretation of a p-value.                                                                                                                                                                                             |
-|   24 | Able to reason about how increasing the sample size affects the p-value, all else being equal.                                                                                                                                                            |
+** All Items
+| *Items* | *Measured Learning Goal*                                                                                                                     |
+|---------+----------------------------------------------------------------------------------------------------------------------------------------------|
+|       1 | Able to reason about the purpose of random assignment                                                                                        |
+|       2 | Able to reason about the factors that allow a sample of data to be representative of the population.                                         |
+|       3 | Able to reason about how correlation does not imply causation.                                                                               |
+|       4 | Able to reason about the effect of  moving an influential point to a new location on the correlation coefficient                             |
+|       5 | Able to reason that no statistical significance does not guarantee that there is no effect.                                                  |
+|       6 | Able to reason about the relationship between sample size and statistical significance                                                       |
+|       7 | Able to reason about factors that affect the mean and median                                                                                 |
+|       8 | Able to reason that given two distributions that have the same range, the one with less mass in the center has the larger standard deviation |
+|       9 | Able to reason about differences between empirical sampling distributions for large and small sample sizes.                                  |
+|      10 | Able to reason about how to judge differences when visually comparing two samples of data.                                                   |
+|      11 | Able to reason about how differences in center and in variability affect strength of evidence against the null hypothesis of no difference   |
+|      12 | Able to reason about how differences in center and in variability affect strength of evidence against the null hypothesis of no difference   |
+|      13 | Able to reason about how the width of a confidence interval is related to sample size.                                                       |
+|      14 | Able to reason about how the width of a confidence interval is related to level of confidence.                                               |
+|      15 | Able to reason about a misinterpretation of a confidence level (the range of observed values for individual observational units or cases)    |
+|      16 | Able to reason about a misinterpretation of a confidence level (using it to make a prediction for a single case)                             |
+|      17 | Able to reason about what the null model represents in a research study                                                                      |
+|      18 | Able to reason about what model should be used for the null hypothesis when comparing two groups                                             |
+|      19 | Able to reason about how to find a p-value based on simulation results.                                                                      |
+|      20 | Able to reason about a conclusion based on a statistically significant p-value in the context of a research study that compares two groups   |
+|      21 | Able to reason about an incorrect interpretation of a p-value (probability of a treatment being more effective).                             |
+|      22 | Able to reason about the correct interpretation of a p-value.                                                                                |
+|      23 | Able to reason about how increasing the sample size affects the p-value, all else being equal.                                               |
+#+TBLFM: $1=@#-1
 
+** Sample size
+| *Items* | *Gloss*                                           |
+|---------+---------------------------------------------------|
+|       6 | Herbicide: sample size may be why not significant |
+|       9 | Candies problem (visual)                          |
+|      12 | CI/Sample size                                    |
+|      23 | Increase in sample size -> p-value                |
+
+#+BEGIN_SRC R
+  samps <- c("q06", "q09", "q12", "q23")
+  samps.rw <- paste0(samps, ".rw")
+  
+  summary(gp[,sort(c(samps, samps.rw))])
+      
+#+END_SRC
+** Variability
+| *Items* | *Gloss*                     |
+|---------+-----------------------------|
+|       8 | Standard deviation dotplots |
+|      11 | Weight training             |
+|         |                             |
 
 
 
