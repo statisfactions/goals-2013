@@ -1,5 +1,5 @@
 #+TITLE: Goals 2013 Descriptives
-#+OPTIONS: H:1 num:nil toc:nil
+#+OPTIONS: toc:nil
 #+AUTHOR: Ethan Brown
 #+LaTex_HEADER: \usepackage[cm]{fullpage}
 #+LaTex_HEADER: \pagestyle{empty}
@@ -7,21 +7,32 @@
 #+LaTex_HEADER: \DeclareUnicodeCharacter{00A0}{~}
 
 * Setup
-#+BEGIN_SRC R
+#+BEGIN_SRC R :ravel setup
   gp.raw <- read.csv("/home/fortis/goals-2013/data-in/GOALS-DEIDENTIFIED-2013-12-20.csv")
   
   ## Exclude non-consenting
   summary(factor(gp.raw$consent)) ## no missing values; 38 nonconsenting, 1165 consenting
   gp <- gp.raw[ gp.raw$consent == 1, ] ## 2 = non-consenting
+  
+  ## Replace response numeric codes with factors for reasonable summarizing
+  responsecols <- grep("^q..$", names(gp), value = T)
+  gp[,responsecols] <- lapply(gp[,responsecols], factor)
+  
+  
 #+END_SRC
 
+#+BEGIN_SRC R :revel recode
+  ## Add response options
+  
+
+#+END_SRC
 * Missing values
 #+BEGIN_SRC R
 table(gp$missing)
 #+END_SRC
 
 * Overall summary
-#+BEGIN_SRC R :ravel fig=TRUE
+#+BEGIN_SRC R :ravel overall,fig=TRUE
   gp$pcorrect <- gp$total.correct/23
   summary(gp$pcorrect)
   summary(gp$total.correct)
@@ -46,8 +57,8 @@ table(gp$missing)
 |       8 | Able to reason that given two distributions that have the same range, the one with less mass in the center has the larger standard deviation |
 |       9 | Able to reason about differences between empirical sampling distributions for large and small sample sizes.                                  |
 |      10 | Able to reason about how to judge differences when visually comparing two samples of data.                                                   |
-|      11 | Able to reason about how differences in center and in variability affect strength of evidence against the null hypothesis of no difference   |
-|      12 | Able to reason about how differences in center and in variability affect strength of evidence against the null hypothesis of no difference   |
+|      11 | Able to reason about how differences in center affect strength of evidence against the null hypothesis of no difference                      |
+|      12 | Able to reason about how differences in variability affect strength of evidence against the null hypothesis of no difference                 |
 |      13 | Able to reason about how the width of a confidence interval is related to sample size.                                                       |
 |      14 | Able to reason about how the width of a confidence interval is related to level of confidence.                                               |
 |      15 | Able to reason about a misinterpretation of a confidence level (the range of observed values for individual observational units or cases)    |
@@ -69,19 +80,39 @@ table(gp$missing)
 |      12 | CI/Sample size                                    |
 |      23 | Increase in sample size -> p-value                |
 
-#+BEGIN_SRC R
+#+BEGIN_SRC R :ravel sample.size
   samps <- c("q06", "q09", "q12", "q23")
   samps.rw <- paste0(samps, ".rw")
   
   summary(gp[,sort(c(samps, samps.rw))])
+  round(cor(gp[,samps.rw], use = "complete.obs"), 2)
       
 #+END_SRC
+
+** Focus on center
+| *Items* | *Gloss*                   |
+|---------+---------------------------|
+|      10 | Headache problem          |
+|      11 | Weight training 1: center |
+
+#+BEGIN_SRC R :ravel central
+  cents <- c("q10", "q11")
+  cents.rw <- paste0(cents, ".rw")
+  
+  summary(gp[,sort(c(cents, cents.rw))])
+  round(cor(gp[,cents.rw], use = "complete.obs"), 2)
+#+END_SRC
 ** Variability
-| *Items* | *Gloss*                     |
-|---------+-----------------------------|
-|       8 | Standard deviation dotplots |
-|      11 | Weight training             |
-|         |                             |
+| *Items* | *Gloss*                        |
+|---------+--------------------------------|
+|       8 | Standard deviation dotplots    |
+|      12 | Weight training 2: variability |
 
 
-
+#+BEGIN_SRC R :ravel variability 
+  vars <- c("q08", "q12")
+  vars.rw <- paste0(vars, ".rw")
+  
+  summary(gp[,sort(c(vars, vars.rw))])
+  round(cor(gp[,vars.rw], use = "complete.obs"), 2)
+#+END_SRC
