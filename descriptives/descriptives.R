@@ -48,22 +48,22 @@ table(gp$missing)
 
 
 ###################################################
-### code chunk number 4: overall
-###################################################
-gp$pcorrect <- gp$total.correct/23
-summary(gp$pcorrect)
-summary(gp$total.correct)
-tb <- table(gp$total.correct)
-
-
-hist(gp$pcorrect, breaks = seq(0, 1, length.out = 24))
-
-
-###################################################
-### code chunk number 5: corrgram
+### code chunk number 4: corrgram
 ###################################################
 library(corrgram)
 corrgram(gp.rw, cex.labels = 1.5, lower.panel = panel.shade, upper.panel = panel.pie)
+
+
+###################################################
+### code chunk number 5: percentCorrect
+###################################################
+library(ggplot2)
+
+pc <- colMeans(gp.rw, na.rm = T)
+round(pc, 2)
+
+names(pc) <- 1:23
+barplot(pc)
 
 
 ###################################################

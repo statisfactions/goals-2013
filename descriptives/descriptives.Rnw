@@ -1,4 +1,4 @@
-% Created 2013-12-26 Thu 22:43
+% Created 2013-12-27 Fri 03:03
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -74,22 +74,12 @@ gp$q12 <- factor(gp$q12, labels = c("Smaller variability", "Larger variability",
 <<>>=
 table(gp$missing)
 @ %def
-\section{Overall summary}
+
+\section{Items}
 \label{sec-3}
-<<overall,fig=TRUE>>=
-gp$pcorrect <- gp$total.correct/23
-summary(gp$pcorrect)
-summary(gp$total.correct)
-tb <- table(gp$total.correct)
-
-
-hist(gp$pcorrect, breaks = seq(0, 1, length.out = 24))
-@ %def
-\section{Index of items}
-\label{sec-4}
 
 \subsection{All Items}
-\label{sec-4-1}
+\label{sec-3-1}
 \begin{center}
 \begin{tabular}{rl}
 \textbf{Items} & \textbf{Measured Learning Goal}\\
@@ -124,8 +114,28 @@ hist(gp$pcorrect, breaks = seq(0, 1, length.out = 24))
 library(corrgram)
 corrgram(gp.rw, cex.labels = 1.5, lower.panel = panel.shade, upper.panel = panel.pie)
 @ %def
+
+Bivariate correlations seem generally quite low.  The mean/median item (q07) has among the largest number of substantially correlated items.  q09, the candies item, and q13, the CI/Sample size item, both have a lot of healthy intercorrelations.
+
+The Alice testlet seems to pop out quite separately from the other items\ldots{} we may be getting a very different group of students who do well on the Alice items than the others (but this conclusion should be taken with caution as it's based only on bivariate correlations).  It would be interesting to do some principle components on this.
+fdjksalf
+<<percentCorrect,fig=TRUE,width=8>>=
+library(ggplot2)
+
+pc <- colMeans(gp.rw, na.rm = T)
+round(pc, 2)
+
+names(pc) <- 1:23
+barplot(pc)
+@ %def
+
+
+
+\subsubsection{{\bfseries\sffamily TODO} replace this table with glosses/descriptions of the items for quick reference}
+\label{sec-3-1-1}
+
 \subsection{Sample size}
-\label{sec-4-2}
+\label{sec-3-2}
 \begin{center}
 \begin{tabular}{rl}
 \textbf{Items} & \textbf{Gloss}\\
@@ -144,8 +154,31 @@ samps.rw <- paste0(samps, ".rw")
 summary(gp[,sort(c(samps, samps.rw))])
 round(cor(gp[,samps.rw], use = "complete.obs"), 2)
 @ %def
+
+As noted above in ``All Items'', both 9 and 13 are items that seem to have a lot in common with several other items, although I haven't seen whether those items are all visual items (both 9 and 13 are visual).
+
+q06, the herbicide item, was one of the easier items, with 72\% correct.  The item presents subjects with the possibility that too small sample size, even in the presence of an effect, may account for the finding.
+
+Formally, this is rather similar to q23, also an entirely verbal item, which asks students to see what would happen what would happen to the sample size if they got the same effect with a larger sample.  But, that was a much harder item (45 \% correct), and the correlation between the two appears to be rather low. The more popular distractor was to say that the p-value would be the same in the larger sample size, which is what we would expect when people do not incorporate the effect of sample size on sampling variability.  But there may be a good deal of other misunderstandings built into these responses, because that would presuppose that people showed good understanding of the p-value as well.
+
+People did better on the candies problem\ldots{} I believe the previous performance was in the 20s or 30s?  Here, 50\% got it correct.  It's a few less steps now, we directly ask to evaluate the variability of the sampling distribution, rather than asking them to reason about the likelihood of a deviation from expectation. One way to solve this is to follow through the \emph{logical consequences} of the variability, but that adds steps onto the task.  The dominant misconception is, as before, that the larger and smaller have the same variability, but something about seeing this representation may cue them to think in a different manner about the issue.
+
+Interestingly, the dominant misconception on the confidence interval one (which was also near 50\%) was that the larger sample size would have a larger confidence interval.  We have no idea how students are thinking about this, but it may be due to the complicated nature of confidence intervals more than a conception about the empirical distribution of sample statistics. It'd be interesting to crosstab these two.
+
+
+\subsubsection{{\bfseries\sffamily TODO} Compare p-value item to other p-value items\ldots{} what happens to those who get the other two \emph{right}?}
+\label{sec-3-2-1}
+
+\subsubsection{{\bfseries\sffamily TODO} In general, I could do an analysis of performance on sample size items among the highest-performing students that appear to show good reasoning skills about everything besides for sample size.}
+\label{sec-3-2-2}
+
+Or look at different slices of students at different total (or total-minus-sample-size) levels
+
+\subsubsection{{\bfseries\sffamily TODO} crosstab/mosaic plot of q09 vs q13}
+\label{sec-3-2-3}
+
 \subsection{Focus on center}
-\label{sec-4-3}
+\label{sec-3-3}
 \begin{center}
 \begin{tabular}{rl}
 \textbf{Items} & \textbf{Gloss}\\
@@ -155,6 +188,7 @@ round(cor(gp[,samps.rw], use = "complete.obs"), 2)
 \end{tabular}
 \end{center}
 
+I didn't include q07, the mean/median item, because it's not really about inference; instead, it's about what \emph{affects} the mean and median.
 <<central>>=
 cents <- c("q10", "q11")
 cents.rw <- paste0(cents, ".rw")
@@ -164,7 +198,7 @@ round(cor(gp[,cents.rw], use = "complete.obs"), 2)
 @ %def
 
 \subsection{Variability}
-\label{sec-4-4}
+\label{sec-3-4}
 \begin{center}
 \begin{tabular}{rl}
 \textbf{Items} & \textbf{Gloss}\\
