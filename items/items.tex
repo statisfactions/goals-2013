@@ -1,0 +1,154 @@
+% Created 2013-12-28 Sat 12:23
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage[cm]{fullpage}
+\pagestyle{empty}
+\thispagestyle{empty}
+\DeclareUnicodeCharacter{00A0}{~}
+\author{Ethan Brown}
+\date{\today}
+\title{Goals 2013 Item analysis}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.2.1 (Org mode 8.2.1)}}
+\usepackage{Sweave}
+\begin{document}
+
+\maketitle
+\begin{Schunk}
+\begin{Sinput}
+> source("/home/fortis/goals-2013/descriptives/descriptives.R")
+> library(psych)
+\end{Sinput}
+\end{Schunk}
+
+\section{Basic item analysis}
+\label{sec-1}
+
+\begin{Schunk}
+\begin{Sinput}
+> al <- alpha(gp.rw)
+> al
+\end{Sinput}
+\begin{Soutput}
+Reliability analysis   
+Call: alpha(x = gp.rw)
+
+  raw_alpha std.alpha G6(smc) average_r mean   sd
+      0.67      0.66    0.68     0.079 0.51 0.16
+
+ Reliability if an item is dropped:
+       raw_alpha std.alpha G6(smc) average_r
+q01.rw      0.66      0.65    0.67     0.079
+q02.rw      0.65      0.64    0.66     0.076
+q03.rw      0.66      0.66    0.67     0.081
+q04.rw      0.65      0.65    0.67     0.078
+q05.rw      0.67      0.67    0.68     0.083
+q06.rw      0.67      0.67    0.68     0.084
+q07.rw      0.64      0.64    0.65     0.075
+q08.rw      0.65      0.65    0.66     0.077
+q09.rw      0.65      0.65    0.66     0.077
+q10.rw      0.66      0.66    0.67     0.081
+q11.rw      0.66      0.66    0.67     0.079
+q12.rw      0.66      0.66    0.67     0.080
+q13.rw      0.64      0.64    0.65     0.074
+q14.rw      0.65      0.65    0.67     0.078
+q15.rw      0.66      0.66    0.68     0.081
+q16.rw      0.67      0.67    0.68     0.085
+q17.rw      0.66      0.65    0.67     0.079
+q18.rw      0.65      0.65    0.66     0.076
+q19.rw      0.66      0.66    0.67     0.080
+q20.rw      0.65      0.65    0.66     0.077
+q21.rw      0.65      0.64    0.66     0.076
+q22.rw      0.67      0.66    0.67     0.082
+q23.rw      0.66      0.65    0.67     0.079
+
+ Item statistics 
+          n    r r.cor r.drop mean   sd
+q01.rw 1165 0.34 0.269  0.217 0.27 0.44
+q02.rw 1165 0.44 0.401  0.328 0.64 0.48
+q03.rw 1164 0.29 0.208  0.167 0.17 0.38
+q04.rw 1165 0.37 0.306  0.248 0.42 0.49
+q05.rw 1165 0.23 0.143  0.108 0.54 0.50
+q06.rw 1164 0.19 0.092  0.068 0.73 0.45
+q07.rw 1163 0.48 0.453  0.372 0.68 0.47
+q08.rw 1164 0.41 0.371  0.303 0.43 0.49
+q09.rw 1162 0.40 0.355  0.290 0.50 0.50
+q10.rw 1163 0.30 0.218  0.176 0.74 0.44
+q11.rw 1160 0.33 0.263  0.215 0.76 0.43
+q12.rw 1163 0.31 0.238  0.192 0.65 0.48
+q13.rw 1154 0.50 0.484  0.398 0.47 0.50
+q14.rw 1152 0.38 0.323  0.266 0.63 0.48
+q15.rw 1164 0.28 0.196  0.157 0.59 0.49
+q16.rw 1164 0.17 0.067  0.050 0.34 0.47
+q17.rw 1164 0.34 0.277  0.222 0.41 0.49
+q18.rw 1163 0.42 0.386  0.312 0.35 0.48
+q19.rw 1162 0.32 0.249  0.197 0.34 0.47
+q20.rw 1164 0.41 0.362  0.292 0.40 0.49
+q21.rw 1165 0.43 0.402  0.316 0.49 0.50
+q22.rw 1163 0.26 0.197  0.142 0.64 0.48
+q23.rw 1161 0.34 0.281  0.228 0.45 0.50
+
+Non missing response frequency for each item
+          0    1 miss
+q01.rw 0.73 0.27 0.00
+q02.rw 0.36 0.64 0.00
+q03.rw 0.83 0.17 0.00
+q04.rw 0.58 0.42 0.00
+q05.rw 0.46 0.54 0.00
+q06.rw 0.27 0.73 0.00
+q07.rw 0.32 0.68 0.00
+q08.rw 0.57 0.43 0.00
+q09.rw 0.50 0.50 0.00
+q10.rw 0.26 0.74 0.00
+q11.rw 0.24 0.76 0.00
+q12.rw 0.35 0.65 0.00
+q13.rw 0.53 0.47 0.01
+q14.rw 0.37 0.63 0.01
+q15.rw 0.41 0.59 0.00
+q16.rw 0.66 0.34 0.00
+q17.rw 0.59 0.41 0.00
+q18.rw 0.65 0.35 0.00
+q19.rw 0.66 0.34 0.00
+q20.rw 0.60 0.40 0.00
+q21.rw 0.51 0.49 0.00
+q22.rw 0.36 0.64 0.00
+q23.rw 0.55 0.45 0.00
+\end{Soutput}
+\end{Schunk}
+
+Coeff alpha is at 0.67, seems a bit low for a test like this.  The within-subject variance is higher than would be expected if the items were all really measuring the same thing.  I believe 0.7 is the usual cutoff for studies like this?
+
+I'm not sure how surprising this is, since I don't necessarily expect that ``statistical reasoning'' is a unitary concept.  There's very clearly several subscales and distinct concepts that we would expect to go different directions, such as confidence intervals, study design, \emph{p}-values, etc.
+
+I don't see any cause for concern for the changes in reliability here.
+
+\begin{Schunk}
+\begin{Sinput}
+> r.cor <- al$item.stats$r.cor
+> names(r.cor) <- 1:23
+> barplot(rev(r.cor), horiz = T, las = 2, main = "Item discrimination (r.cor)")
+> abline(v=0.2, col = "red")
+\end{Sinput}
+\end{Schunk}
+\includegraphics{items-cttDiscrim}
+
+Both of the herbicide items, including the supposed sample size one (q06) had very poor discrimination.  There may be some confusion about what exactly this item is saying or implying. The worst discrimination was on q16, the confidence interval/prediction for a single case (which was a relatively difficult item, as well, PC = $~ 0.34$).  q09, the candies problem, had decent discimination, q23 had acceptable, and q13 had excellent discrimination.
+% Emacs 24.2.1 (Org mode 8.2.1)
+\end{document}
