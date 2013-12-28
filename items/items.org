@@ -34,3 +34,9 @@ I don't see any cause for concern for the changes in reliability here.
 
 Both of the herbicide items, including the supposed sample size one (q06) had very poor discrimination.  There may be some confusion about what exactly this item is saying or implying. The worst discrimination was on q16, the confidence interval/prediction for a single case (which was a relatively difficult item, as well, PC = $~ 0.34$).  q09, the candies problem, had decent discimination, q23 had acceptable, and q13 had excellent discrimination.
 
+* Distractor analysis
+
+#+BEGIN_SRC R :ravel distractors
+
+
+#+END_SRC
