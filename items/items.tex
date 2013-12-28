@@ -1,4 +1,4 @@
-% Created 2013-12-28 Sat 12:23
+% Created 2013-12-28 Sat 13:26
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -150,5 +150,78 @@ I don't see any cause for concern for the changes in reliability here.
 \includegraphics{items-cttDiscrim}
 
 Both of the herbicide items, including the supposed sample size one (q06) had very poor discrimination.  There may be some confusion about what exactly this item is saying or implying. The worst discrimination was on q16, the confidence interval/prediction for a single case (which was a relatively difficult item, as well, PC = $~ 0.34$).  q09, the candies problem, had decent discimination, q23 had acceptable, and q13 had excellent discrimination.
+\section{Distractor analysis}
+\label{sec-2}
+
+\begin{Schunk}
+\begin{Sinput}
+> source("/home/fortis/goals-2013/functions.R")
+> d06 <- distractors("q06", gp)
+> d09 <- distractors("q09", gp)
+> d13 <- distractors("q13", gp)
+> d23 <- distractors("q23", gp)
+> plq06 <- ggplot(d06, aes(pct.minus, scalecount, color = col)) +
++     geom_line() +
++     theme_bw() +
++     xlab("Proportion correct (excluding this item)") +
++     ylab("Students") +
++     ggtitle("Distractor analysis") +
++     coord_cartesian(ylim = c(0, 1)) + 
++     scale_color_discrete(name = "Sample size may be why not significant")
+> print(plq06)
+\end{Sinput}
+\end{Schunk}
+
+\begin{Schunk}
+\begin{Sinput}
+> plq06 <- ggplot(d06, aes(pct.minus, scalecount, color = col)) +
++     geom_line() +
++     theme_bw() +
++     xlab("Proportion correct (excluding this item)") +
++     ylab("Students") +
++     ggtitle("Herbicide/sample size (q06)") +
++     coord_cartesian(ylim = c(0, 1)) + 
++     scale_color_discrete(name = "Sample size may be why not significant") +
++     theme(legend.position = "top")
+> print(plq06)
+\end{Sinput}
+\end{Schunk}
+\includegraphics{items-distract06}
+
+\begin{Schunk}
+\begin{Sinput}
+> ## name conflict with %+%, which is why I need to use colon notation here
+> 
+> plq09 <- ggplot2::"%+%"(plq06, d09) + 
++     scale_color_discrete(name = "Variability difference") +
++     ggtitle("Candies problem (q09)")
+> plq09
+\end{Sinput}
+\end{Schunk}
+\includegraphics{items-distract09}
+
+\begin{Schunk}
+\begin{Sinput}
+> ## name conflict with %+%, which is why I need to use colon notation here
+> 
+> plq13 <- ggplot2::"%+%"(plq06, d13) +
++     scale_color_discrete(name = "CI width difference") +
++     ggtitle("CIs and sample size (q13)")
+> plq13
+\end{Sinput}
+\end{Schunk}
+\includegraphics{items-distract13}
+
+\begin{Schunk}
+\begin{Sinput}
+> ## name conflict with %+%, which is why I need to use colon notation here
+> 
+> plq23 <- ggplot2::"%+%"(plq06, d23) + 
++     scale_color_discrete(name = "p-value comparison") +
++     ggtitle("P-value and sample size (q23)")
+> plq23
+\end{Sinput}
+\end{Schunk}
+\includegraphics{items-distract23}
 % Emacs 24.2.1 (Org mode 8.2.1)
 \end{document}

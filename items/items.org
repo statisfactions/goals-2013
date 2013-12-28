@@ -37,6 +37,65 @@ Both of the herbicide items, including the supposed sample size one (q06) had ve
 * Distractor analysis
 
 #+BEGIN_SRC R :ravel distractors
+  source("/home/fortis/goals-2013/functions.R")
+  
+  d06 <- distractors("q06", gp)
+  d09 <- distractors("q09", gp)
+  d13 <- distractors("q13", gp)
+  d23 <- distractors("q23", gp)
+  
+  plq06 <- ggplot(d06, aes(pct.minus, scalecount, color = col)) +
+      geom_line() +
+      theme_bw() +
+      xlab("Proportion correct (excluding this item)") +
+      ylab("Students") +
+      ggtitle("Distractor analysis") +
+      coord_cartesian(ylim = c(0, 1)) + 
+      scale_color_discrete(name = "Sample size may be why not significant")
+  print(plq06)
+  
+#+END_SRC
 
+#+BEGIN_SRC R :ravel distract06,fig=TRUE,width=9
+  plq06 <- ggplot(d06, aes(pct.minus, scalecount, color = col)) +
+      geom_line() +
+      theme_bw() +
+      xlab("Proportion correct (excluding this item)") +
+      ylab("Students") +
+      ggtitle("Herbicide/sample size (q06)") +
+      coord_cartesian(ylim = c(0, 1)) + 
+      scale_color_discrete(name = "Sample size may be why not significant") +
+      theme(legend.position = "top")
+  print(plq06)
+  
+#+END_SRC
 
+#+BEGIN_SRC R :ravel distract09,fig=TRUE,width=9
+  ## name conflict with %+%, which is why I need to use colon notation here
+  
+  plq09 <- ggplot2::"%+%"(plq06, d09) + 
+      scale_color_discrete(name = "Variability difference") +
+      ggtitle("Candies problem (q09)")
+  plq09
+    
+#+END_SRC
+
+#+BEGIN_SRC R :ravel distract13,fig=TRUE,width=9
+  ## name conflict with %+%, which is why I need to use colon notation here
+  
+  plq13 <- ggplot2::"%+%"(plq06, d13) +
+      scale_color_discrete(name = "CI width difference") +
+      ggtitle("CIs and sample size (q13)")
+  plq13
+    
+#+END_SRC
+
+#+BEGIN_SRC R :ravel distract23,fig=TRUE,width=9
+  ## name conflict with %+%, which is why I need to use colon notation here
+  
+  plq23 <- ggplot2::"%+%"(plq06, d23) + 
+      scale_color_discrete(name = "p-value comparison") +
+      ggtitle("P-value and sample size (q23)")
+  plq23
+    
 #+END_SRC
