@@ -1,0 +1,36 @@
+#+TITLE: Goals 2013 Item analysis
+#+OPTIONS: toc:nil
+#+AUTHOR: Ethan Brown
+#+LaTex_HEADER: \usepackage[cm]{fullpage}
+#+LaTex_HEADER: \pagestyle{empty}
+#+LaTex_HEADER: \thispagestyle{empty}
+#+LaTex_HEADER: \DeclareUnicodeCharacter{00A0}{~}
+
+#+BEGIN_SRC R :ravel setup
+  source("/home/fortis/goals-2013/descriptives/descriptives.R")
+  library(psych)
+#+END_SRC
+
+* Basic item analysis
+
+#+BEGIN_SRC R :ravel alpha
+  al <- alpha(gp.rw)
+  al
+#+END_SRC
+
+Coeff alpha is at 0.67, seems a bit low for a test like this.  The within-subject variance is higher than would be expected if the items were all really measuring the same thing.  I believe 0.7 is the usual cutoff for studies like this?
+
+I'm not sure how surprising this is, since I don't necessarily expect that ``statistical reasoning'' is a unitary concept.  There's very clearly several subscales and distinct concepts that we would expect to go different directions, such as confidence intervals, study design, /p/-values, etc.
+
+I don't see any cause for concern for the changes in reliability here.
+
+#+BEGIN_SRC R :ravel cttDiscrim,fig=TRUE
+  r.cor <- al$item.stats$r.cor
+  names(r.cor) <- 1:23
+  barplot(rev(r.cor), horiz = T, las = 2, main = "Item discrimination (r.cor)")
+  abline(v=0.2, col = "red")
+  
+#+END_SRC
+
+Both of the herbicide items, including the supposed sample size one (q06) had very poor discrimination.  There may be some confusion about what exactly this item is saying or implying. The worst discrimination was on q16, the confidence interval/prediction for a single case (which was a relatively difficult item, as well, PC = $~ 0.34$).  q09, the candies problem, had decent discimination, q23 had acceptable, and q13 had excellent discrimination.
+
