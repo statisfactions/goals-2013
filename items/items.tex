@@ -1,4 +1,4 @@
-% Created 2013-12-29 Sun 18:22
+% Created 2013-12-29 Sun 18:46
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -282,5 +282,55 @@ Smaller than original      Same as original  Larger than original
 Though somewhat more difficult, this item appears more in line with the results and the expected misconceptions from the candies problem and is a very similar graph.. Again, the \emph{p}-value is a complex compound construct, and the formal equivalency may be masking other differences in the tasks.  We'll perhaps see this more clearly once we do our mosaic plots.
 \section{Distractor mosaics}
 \label{sec-3}
+
+\subsection{Herbicide (q06)}
+\label{sec-3-1}
+Overall, it seems the \emph{only} convincing bivariate associations between these variables is the big difference for correct answers.  Errors do not seem particularly diagnostic of each other, which is consistent with findings from my poster and the fact that incorrect answers will tend to be based on intuitions, and the intuitions will be likely to vary between these four very different contexts and representations, despite their formal equivalence.
+
+
+\begin{Schunk}
+\begin{Sinput}
+> mosaicplot(with(gp, table(q06, q09)), color=T)
+\end{Sinput}
+\end{Schunk}
+\includegraphics{items-013}
+
+\begin{Schunk}
+\begin{Sinput}
+> mosaicplot(with(gp, table(q06, q13)), color=T)
+\end{Sinput}
+\end{Schunk}
+\includegraphics{items-014}
+
+\begin{Schunk}
+\begin{Sinput}
+> mosaicplot(with(gp, table(q06, q23)), color=T)
+\end{Sinput}
+\end{Schunk}
+\includegraphics{items-015}
+\subsection{Candies (q09)}
+\label{sec-3-2}
+
+\begin{Schunk}
+\begin{Sinput}
+> mosaicplot(with(gp, table(q09, q13)), color=T)
+\end{Sinput}
+\end{Schunk}
+\includegraphics{items-016}
+
+\begin{Schunk}
+\begin{Sinput}
+> mosaicplot(with(gp, table(q09, q23)), color=T)
+\end{Sinput}
+\end{Schunk}
+\includegraphics{items-017}
+\subsection{CI (q13)}
+\label{sec-3-3}
+\begin{Schunk}
+\begin{Sinput}
+> mosaicplot(with(gp, table(q13, q23)), color=T)
+\end{Sinput}
+\end{Schunk}
+\includegraphics{items-018}
 % Emacs 24.2.1 (Org mode 8.2.1)
 \end{document}
