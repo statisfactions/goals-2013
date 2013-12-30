@@ -36,23 +36,19 @@ Both of the herbicide items, including the supposed sample size one (q06) had ve
 
 * Distractor analysis
 
-#+BEGIN_SRC R :ravel distractors
+** Herbicide (q06)
+#+BEGIN_SRC R :ravel distractors.setup
   source("/home/fortis/goals-2013/functions.R")
   
   d06 <- distractors("q06", gp)
+  lab06 <- "Sample size may be why not significant"
   d09 <- distractors("q09", gp)
+  lab09 <- "Variability difference"
   d13 <- distractors("q13", gp)
+  lab13 <- "CI width difference"
   d23 <- distractors("q23", gp)
+  lab23 <- "p-value comparison"
   
-  plq06 <- ggplot(d06, aes(pct.minus, scalecount, color = col)) +
-      geom_line() +
-      theme_bw() +
-      xlab("Proportion correct (excluding this item)") +
-      ylab("Students") +
-      ggtitle("Distractor analysis") +
-      coord_cartesian(ylim = c(0, 1)) + 
-      scale_color_discrete(name = "Sample size may be why not significant")
-  print(plq06)
   
 #+END_SRC
 
@@ -64,38 +60,74 @@ Both of the herbicide items, including the supposed sample size one (q06) had ve
       ylab("Students") +
       ggtitle("Herbicide/sample size (q06)") +
       coord_cartesian(ylim = c(0, 1)) + 
-      scale_color_discrete(name = "Sample size may be why not significant") +
+      scale_color_discrete(name = lab06) +
       theme(legend.position = "top")
   print(plq06)
-  
 #+END_SRC
+
+#+BEGIN_SRC R
+  round(prop.table(table(gp$q06)), 2)
+#+END_SRC
+
+The Herbicide sample size item appears to be telling us very little about differences between students.  Across ability levels, 75\% of students got the item correct pretty stably, as indicated by the relatively flat line above (only really diverging at around 0.9 PC, which is a tiny number of students).
+
+This may suggest a common intuitive reaction to this item that is independent of the other items in the instrument.
+
+** Candies (q09)
 
 #+BEGIN_SRC R :ravel distract09,fig=TRUE,width=9
   ## name conflict with %+%, which is why I need to use colon notation here
   
   plq09 <- ggplot2::"%+%"(plq06, d09) + 
-      scale_color_discrete(name = "Variability difference") +
+      scale_color_discrete(name = lab09) +
       ggtitle("Candies problem (q09)")
   plq09
     
 #+END_SRC
 
+#+BEGIN_SRC R
+  round(prop.table(table(gp$q09)), 2)
+#+END_SRC
+Clearly, the dominant misconception here is thinking that the two distributions of sample statistics are essentially the same (0.34).  This answer is neck in neck with the correct answers for the modal students (btw around .25 and .45 PC), where it starts to diverge as proportion correct increases.  Unsurprisingly this remains a strong misconception.
+
+** CI/Sample size (q13)
 #+BEGIN_SRC R :ravel distract13,fig=TRUE,width=9
   ## name conflict with %+%, which is why I need to use colon notation here
   
   plq13 <- ggplot2::"%+%"(plq06, d13) +
-      scale_color_discrete(name = "CI width difference") +
+      scale_color_discrete(name = lab13) +
       ggtitle("CIs and sample size (q13)")
   plq13
     
 #+END_SRC
 
+#+BEGIN_SRC R
+  round(prop.table(table(gp$q13)), 2)
+#+END_SRC
+
+Interestingly, the prominent misconception on confidence intervals is different: people are more likely to think that larger CIS are wider, which may represent some basic misunderstandings of the way that confidence intervals work and what they represent.
+
+Based on the ``size-confidence intuition'', I was expecting this item to be easier than the candies problem, but that of course presupposes that people have a solid understanding of confidence intervals and what they represent (which is certainly not a given!).  Since this is formally so similar to the candies problem, it is a good question why a different distractor seems to dominate here.
+
+This is perhaps the most puzzling of the results, because the usual misconception is what I would term sample size insensitivity, which would favor the ``same'' response.  Something else is afoot here, though it may be localized to familiar misconceptions about confidence intervals.
+
+*** TODO Lit search on CI misconceptions?
+
+** P-value and sample size (q23)
+
 #+BEGIN_SRC R :ravel distract23,fig=TRUE,width=9
   ## name conflict with %+%, which is why I need to use colon notation here
   
   plq23 <- ggplot2::"%+%"(plq06, d23) + 
-      scale_color_discrete(name = "p-value comparison") +
+      scale_color_discrete(name = lab23) +
       ggtitle("P-value and sample size (q23)")
   plq23
     
 #+END_SRC
+#+BEGIN_SRC R
+  round(prop.table(table(gp$q23)), 2)
+#+END_SRC
+
+Though somewhat more difficult, this item appears more in line with the results and the expected misconceptions from the candies problem and is a very similar graph.. Again, the /p/-value is a complex compound construct, and the formal equivalency may be masking other differences in the tasks.  We'll perhaps see this more clearly once we do our mosaic plots.
+
+* Distractor mosaics
