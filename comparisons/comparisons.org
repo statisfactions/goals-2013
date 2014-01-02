@@ -10,41 +10,86 @@
   source("/home/fortis/goals-2013/items/items.R")
 #+END_SRC
 
-* Distractor mosaics
+* Distractor comparisons
 
+** TODO Run Chi-sq on these?
 ** Herbicide (q06)
-Overall, it seems the /only/ convincing bivariate associations between these variables is the big difference for correct answers.  Errors do not seem particularly diagnostic of each other, which is consistent with findings from my poster and the fact that incorrect answers will tend to be based on intuitions, and the intuitions will be likely to vary between these four very different contexts and representations, despite their formal equivalence.
-
-
-#+BEGIN_SRC R :ravel fig=TRUE
-  mosaicplot(with(gp, table(q06, q09)), color=T)
+*** q06 v q09
+#+BEGIN_SRC R
+  (tq06q09 <- with(gp, table(q06, q09)))
+  
+  t(round(prop.table(tq06q09, margin = 1), 2))
+  round(prop.table(tq06q09, margin = 2), 2)
+  
   
 #+END_SRC
 
-#+BEGIN_SRC R :ravel fig=TRUE
-  mosaicplot(with(gp, table(q06, q13)), color=T)
+Thinking that large and small sizes are the *same* on candies is actually mildly associated with getting the correct answer on Herbicide!  Those who thought large n or small n is wider were a bit less likely to get the item correct.
+
+*** q06 v q13
+#+BEGIN_SRC R
+  (tq06q13 <- with(gp, table(q06, q13)))
+  
+  t(round(prop.table(tq06q13, margin = 1), 2))
+  round(prop.table(tq06q13, margin = 2), 2)
+  
   
 #+END_SRC
 
-#+BEGIN_SRC R :ravel fig=TRUE
-  mosaicplot(with(gp, table(q06, q23)), color=T)
+All fairly close in \% terms.
+
+*** q06 v q23
+#+BEGIN_SRC R
+  (tq06q23 <- with(gp, table(q06, q23)))
+  
+  t(round(prop.table(tq06q23, margin = 1), 2))
+  round(prop.table(tq06q23, margin = 2), 2)
+  
   
 #+END_SRC
 
+Mild association with the CORRECT answer.
 ** Candies (q09)
-
-#+BEGIN_SRC R :ravel fig=TRUE
-  mosaicplot(with(gp, table(q09, q13)), color=T)
-
+*** q09 v q13
+#+BEGIN_SRC R
+  (tq09q13 <- with(gp, table(q09, q13)))
+  
+  t(round(prop.table(tq09q13, margin = 1), 2))
+  round(prop.table(tq09q13, margin = 2), 2)
+  
+  
 #+END_SRC
 
-#+BEGIN_SRC R :ravel fig=TRUE
-  mosaicplot(with(gp, table(q09, q23)), color=T)
 
+STRONG association between ``small n wider'' responses; mild large to large and small to small associations.
+*** q09 v q23
+#+BEGIN_SRC R
+  (tq09q23 <- with(gp, table(q09, q23)))
+  
+  t(round(prop.table(tq09q23, margin = 1), 2))
+  round(prop.table(tq09q23, margin = 2), 2)
+  
+  
 #+END_SRC
 
+
+
+
+
+Similarly, STRONG association between ``small n wider'' responses; mild large to large and small to small associations.
 ** CI (q13)
-#+BEGIN_SRC R :ravel fig=TRUE
-  mosaicplot(with(gp, table(q13, q23)), color=T)
-
+*** q13 v q23
+#+BEGIN_SRC R
+  (tq13q23 <- with(gp, table(q13, q23)))
+  
+  t(round(prop.table(tq13q23, margin = 1), 2))
+  round(prop.table(tq13q23, margin = 2), 2)
+  
+  
 #+END_SRC
+
+
+
+
+
+And... one more time! STRONG association between ``small n wider'' to ``p value smaller'' responses; mild large to large and small to small associations.

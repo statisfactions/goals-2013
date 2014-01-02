@@ -8,38 +8,56 @@ source("/home/fortis/goals-2013/items/items.R")
 
 
 ###################################################
-### code chunk number 2: comparisons.Rnw:45-46
+### code chunk number 2: comparisons.Rnw:46-50
 ###################################################
-mosaicplot(with(gp, table(q06, q09)), color=T)
+(tq06q09 <- with(gp, table(q06, q09)))
+
+t(round(prop.table(tq06q09, margin = 1), 2))
+round(prop.table(tq06q09, margin = 2), 2)
 
 
 ###################################################
-### code chunk number 3: comparisons.Rnw:49-50
+### code chunk number 3: comparisons.Rnw:56-60
 ###################################################
-mosaicplot(with(gp, table(q06, q13)), color=T)
+(tq06q13 <- with(gp, table(q06, q13)))
+
+t(round(prop.table(tq06q13, margin = 1), 2))
+round(prop.table(tq06q13, margin = 2), 2)
 
 
 ###################################################
-### code chunk number 4: comparisons.Rnw:53-54
+### code chunk number 4: comparisons.Rnw:66-70
 ###################################################
-mosaicplot(with(gp, table(q06, q23)), color=T)
+(tq06q23 <- with(gp, table(q06, q23)))
+
+t(round(prop.table(tq06q23, margin = 1), 2))
+round(prop.table(tq06q23, margin = 2), 2)
 
 
 ###################################################
-### code chunk number 5: comparisons.Rnw:59-60
+### code chunk number 5: comparisons.Rnw:79-83
 ###################################################
-mosaicplot(with(gp, table(q09, q13)), color=T)
+(tq09q13 <- with(gp, table(q09, q13)))
+
+t(round(prop.table(tq09q13, margin = 1), 2))
+round(prop.table(tq09q13, margin = 2), 2)
 
 
 ###################################################
-### code chunk number 6: comparisons.Rnw:63-64
+### code chunk number 6: comparisons.Rnw:91-95
 ###################################################
-mosaicplot(with(gp, table(q09, q23)), color=T)
+(tq09q23 <- with(gp, table(q09, q23)))
+
+t(round(prop.table(tq09q23, margin = 1), 2))
+round(prop.table(tq09q23, margin = 2), 2)
 
 
 ###################################################
-### code chunk number 7: comparisons.Rnw:68-69
+### code chunk number 7: comparisons.Rnw:108-112
 ###################################################
-mosaicplot(with(gp, table(q13, q23)), color=T)
+(tq13q23 <- with(gp, table(q13, q23)))
+
+t(round(prop.table(tq13q23, margin = 1), 2))
+round(prop.table(tq13q23, margin = 2), 2)
 
 

@@ -1,4 +1,4 @@
-% Created 2014-01-01 Wed 21:37
+% Created 2014-01-02 Thu 10:31
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -37,57 +37,238 @@
 \end{Sinput}
 \end{Schunk}
 
-\section{Distractor mosaics}
+\section{Distractor comparisons}
 \label{sec-1}
 
-\subsection{Herbicide (q06)}
+\subsection{{\bfseries\sffamily TODO} Run Chi-sq on these?}
 \label{sec-1-1}
-Overall, it seems the \emph{only} convincing bivariate associations between these variables is the big difference for correct answers.  Errors do not seem particularly diagnostic of each other, which is consistent with findings from my poster and the fact that incorrect answers will tend to be based on intuitions, and the intuitions will be likely to vary between these four very different contexts and representations, despite their formal equivalence.
-
-
-\begin{Schunk}
-\begin{Sinput}
-> mosaicplot(with(gp, table(q06, q09)), color=T)
-\end{Sinput}
-\end{Schunk}
-\includegraphics{comparisons-002}
-
-\begin{Schunk}
-\begin{Sinput}
-> mosaicplot(with(gp, table(q06, q13)), color=T)
-\end{Sinput}
-\end{Schunk}
-\includegraphics{comparisons-003}
-
-\begin{Schunk}
-\begin{Sinput}
-> mosaicplot(with(gp, table(q06, q23)), color=T)
-\end{Sinput}
-\end{Schunk}
-\includegraphics{comparisons-004}
-\subsection{Candies (q09)}
+\subsection{Herbicide (q06)}
 \label{sec-1-2}
-
+\subsubsection{q06 v q09}
+\label{sec-1-2-1}
 \begin{Schunk}
 \begin{Sinput}
-> mosaicplot(with(gp, table(q09, q13)), color=T)
+> (tq06q09 <- with(gp, table(q06, q09)))
 \end{Sinput}
+\begin{Soutput}
+         q09
+q06       Same Small n is wider Large n is wider
+  Valid    307              409              126
+  Invalid   92              172               55
+\end{Soutput}
+\begin{Sinput}
+> t(round(prop.table(tq06q09, margin = 1), 2))
+\end{Sinput}
+\begin{Soutput}
+                  q06
+q09                Valid Invalid
+  Same              0.36    0.29
+  Small n is wider  0.49    0.54
+  Large n is wider  0.15    0.17
+\end{Soutput}
+\begin{Sinput}
+> round(prop.table(tq06q09, margin = 2), 2)
+\end{Sinput}
+\begin{Soutput}
+         q09
+q06       Same Small n is wider Large n is wider
+  Valid   0.77             0.70             0.70
+  Invalid 0.23             0.30             0.30
+\end{Soutput}
 \end{Schunk}
-\includegraphics{comparisons-005}
 
+Thinking that large and small sizes are the \textbf{same} on candies is actually mildly associated with getting the correct answer on Herbicide!  Those who thought large n or small n is wider were a bit less likely to get the item correct.
+\subsubsection{q06 v q13}
+\label{sec-1-2-2}
 \begin{Schunk}
 \begin{Sinput}
-> mosaicplot(with(gp, table(q09, q23)), color=T)
+> (tq06q13 <- with(gp, table(q06, q13)))
 \end{Sinput}
+\begin{Soutput}
+         q13
+q06       Small n is wider Large n is wider Same
+  Valid                400              287  147
+  Invalid              147              109   63
+\end{Soutput}
+\begin{Sinput}
+> t(round(prop.table(tq06q13, margin = 1), 2))
+\end{Sinput}
+\begin{Soutput}
+                  q06
+q13                Valid Invalid
+  Small n is wider  0.48    0.46
+  Large n is wider  0.34    0.34
+  Same              0.18    0.20
+\end{Soutput}
+\begin{Sinput}
+> round(prop.table(tq06q13, margin = 2), 2)
+\end{Sinput}
+\begin{Soutput}
+         q13
+q06       Small n is wider Large n is wider Same
+  Valid               0.73             0.72 0.70
+  Invalid             0.27             0.28 0.30
+\end{Soutput}
 \end{Schunk}
-\includegraphics{comparisons-006}
-\subsection{CI (q13)}
+
+All fairly close in \% terms.
+\subsubsection{q06 v q23}
+\label{sec-1-2-3}
+\begin{Schunk}
+\begin{Sinput}
+> (tq06q23 <- with(gp, table(q06, q23)))
+\end{Sinput}
+\begin{Soutput}
+         q23
+q06       Smaller than original Same as original Larger than original
+  Valid                     387              280                  173
+  Invalid                   132              115                   73
+\end{Soutput}
+\begin{Sinput}
+> t(round(prop.table(tq06q23, margin = 1), 2))
+\end{Sinput}
+\begin{Soutput}
+                       q06
+q23                     Valid Invalid
+  Smaller than original  0.46    0.41
+  Same as original       0.33    0.36
+  Larger than original   0.21    0.23
+\end{Soutput}
+\begin{Sinput}
+> round(prop.table(tq06q23, margin = 2), 2)
+\end{Sinput}
+\begin{Soutput}
+         q23
+q06       Smaller than original Same as original Larger than original
+  Valid                    0.75             0.71                 0.70
+  Invalid                  0.25             0.29                 0.30
+\end{Soutput}
+\end{Schunk}
+
+Mild association with the CORRECT answer.
+
+\subsection{Candies (q09)}
 \label{sec-1-3}
+\subsubsection{q09 v q13}
+\label{sec-1-3-1}
 \begin{Schunk}
 \begin{Sinput}
-> mosaicplot(with(gp, table(q13, q23)), color=T)
+> (tq09q13 <- with(gp, table(q09, q13)))
 \end{Sinput}
+\begin{Soutput}
+                  q13
+q09                Small n is wider Large n is wider Same
+  Same                          140              157   98
+  Small n is wider              354              151   72
+  Large n is wider               54               87   39
+\end{Soutput}
+\begin{Sinput}
+> t(round(prop.table(tq09q13, margin = 1), 2))
+\end{Sinput}
+\begin{Soutput}
+                  q09
+q13                Same Small n is wider Large n is wider
+  Small n is wider 0.35             0.61             0.30
+  Large n is wider 0.40             0.26             0.48
+  Same             0.25             0.12             0.22
+\end{Soutput}
+\begin{Sinput}
+> round(prop.table(tq09q13, margin = 2), 2)
+\end{Sinput}
+\begin{Soutput}
+                  q13
+q09                Small n is wider Large n is wider Same
+  Same                         0.26             0.40 0.47
+  Small n is wider             0.65             0.38 0.34
+  Large n is wider             0.10             0.22 0.19
+\end{Soutput}
 \end{Schunk}
-\includegraphics{comparisons-007}
+
+
+STRONG association between ``small n wider'' responses; mild large to large and small to small associations.
+
+\subsubsection{q09 v q23}
+\label{sec-1-3-2}
+\begin{Schunk}
+\begin{Sinput}
+> (tq09q23 <- with(gp, table(q09, q23)))
+\end{Sinput}
+\begin{Soutput}
+                  q23
+q09                Smaller than original Same as original Larger than original
+  Same                               150              163                   86
+  Small n is wider                   298              168                  114
+  Large n is wider                    70               63                   46
+\end{Soutput}
+\begin{Sinput}
+> t(round(prop.table(tq09q23, margin = 1), 2))
+\end{Sinput}
+\begin{Soutput}
+                       q09
+q23                     Same Small n is wider Large n is wider
+  Smaller than original 0.38             0.51             0.39
+  Same as original      0.41             0.29             0.35
+  Larger than original  0.22             0.20             0.26
+\end{Soutput}
+\begin{Sinput}
+> round(prop.table(tq09q23, margin = 2), 2)
+\end{Sinput}
+\begin{Soutput}
+                  q23
+q09                Smaller than original Same as original Larger than original
+  Same                              0.29             0.41                 0.35
+  Small n is wider                  0.58             0.43                 0.46
+  Large n is wider                  0.14             0.16                 0.19
+\end{Soutput}
+\end{Schunk}
+
+
+
+
+
+Similarly, STRONG association between ``small n wider'' responses; mild large to large and small to small associations.
+
+\subsection{CI (q13)}
+\label{sec-1-4}
+\subsubsection{q13 v q23}
+\label{sec-1-4-1}
+\begin{Schunk}
+\begin{Sinput}
+> (tq13q23 <- with(gp, table(q13, q23)))
+\end{Sinput}
+\begin{Soutput}
+                  q23
+q13                Smaller than original Same as original Larger than original
+  Small n is wider                   312              149                   85
+  Large n is wider                   133              151                  110
+  Same                                70               92                   48
+\end{Soutput}
+\begin{Sinput}
+> t(round(prop.table(tq13q23, margin = 1), 2))
+\end{Sinput}
+\begin{Soutput}
+                       q13
+q23                     Small n is wider Large n is wider Same
+  Smaller than original             0.57             0.34 0.33
+  Same as original                  0.27             0.38 0.44
+  Larger than original              0.16             0.28 0.23
+\end{Soutput}
+\begin{Sinput}
+> round(prop.table(tq13q23, margin = 2), 2)
+\end{Sinput}
+\begin{Soutput}
+                  q23
+q13                Smaller than original Same as original Larger than original
+  Small n is wider                  0.61             0.38                 0.35
+  Large n is wider                  0.26             0.39                 0.45
+  Same                              0.14             0.23                 0.20
+\end{Soutput}
+\end{Schunk}
+
+
+
+
+
+And\ldots{} one more time! STRONG association between ``small n wider'' to ``p value smaller'' responses; mild large to large and small to small associations.
 % Emacs 24.2.1 (Org mode 8.2.1)
 \end{document}

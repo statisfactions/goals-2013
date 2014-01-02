@@ -1,4 +1,4 @@
-% Created 2014-01-01 Wed 21:37
+% Created 2014-01-02 Thu 10:31
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -34,39 +34,88 @@
 source("/home/fortis/goals-2013/items/items.R")
 @ %def
 
-\section{Distractor mosaics}
+\section{Distractor comparisons}
 \label{sec-1}
 
-\subsection{Herbicide (q06)}
+\subsection{{\bfseries\sffamily TODO} Run Chi-sq on these?}
 \label{sec-1-1}
-Overall, it seems the \emph{only} convincing bivariate associations between these variables is the big difference for correct answers.  Errors do not seem particularly diagnostic of each other, which is consistent with findings from my poster and the fact that incorrect answers will tend to be based on intuitions, and the intuitions will be likely to vary between these four very different contexts and representations, despite their formal equivalence.
-
-
-<<fig=TRUE>>=
-mosaicplot(with(gp, table(q06, q09)), color=T)
-@ %def
-
-<<fig=TRUE>>=
-mosaicplot(with(gp, table(q06, q13)), color=T)
-@ %def
-
-<<fig=TRUE>>=
-mosaicplot(with(gp, table(q06, q23)), color=T)
-@ %def
-\subsection{Candies (q09)}
+\subsection{Herbicide (q06)}
 \label{sec-1-2}
+\subsubsection{q06 v q09}
+\label{sec-1-2-1}
+<<>>=
+(tq06q09 <- with(gp, table(q06, q09)))
 
-<<fig=TRUE>>=
-mosaicplot(with(gp, table(q09, q13)), color=T)
+t(round(prop.table(tq06q09, margin = 1), 2))
+round(prop.table(tq06q09, margin = 2), 2)
 @ %def
 
-<<fig=TRUE>>=
-mosaicplot(with(gp, table(q09, q23)), color=T)
+Thinking that large and small sizes are the \textbf{same} on candies is actually mildly associated with getting the correct answer on Herbicide!  Those who thought large n or small n is wider were a bit less likely to get the item correct.
+\subsubsection{q06 v q13}
+\label{sec-1-2-2}
+<<>>=
+(tq06q13 <- with(gp, table(q06, q13)))
+
+t(round(prop.table(tq06q13, margin = 1), 2))
+round(prop.table(tq06q13, margin = 2), 2)
 @ %def
-\subsection{CI (q13)}
+
+All fairly close in \% terms.
+\subsubsection{q06 v q23}
+\label{sec-1-2-3}
+<<>>=
+(tq06q23 <- with(gp, table(q06, q23)))
+
+t(round(prop.table(tq06q23, margin = 1), 2))
+round(prop.table(tq06q23, margin = 2), 2)
+@ %def
+
+Mild association with the CORRECT answer.
+
+\subsection{Candies (q09)}
 \label{sec-1-3}
-<<fig=TRUE>>=
-mosaicplot(with(gp, table(q13, q23)), color=T)
+\subsubsection{q09 v q13}
+\label{sec-1-3-1}
+<<>>=
+(tq09q13 <- with(gp, table(q09, q13)))
+
+t(round(prop.table(tq09q13, margin = 1), 2))
+round(prop.table(tq09q13, margin = 2), 2)
 @ %def
+
+
+STRONG association between ``small n wider'' responses; mild large to large and small to small associations.
+
+\subsubsection{q09 v q23}
+\label{sec-1-3-2}
+<<>>=
+(tq09q23 <- with(gp, table(q09, q23)))
+
+t(round(prop.table(tq09q23, margin = 1), 2))
+round(prop.table(tq09q23, margin = 2), 2)
+@ %def
+
+
+
+
+
+Similarly, STRONG association between ``small n wider'' responses; mild large to large and small to small associations.
+
+\subsection{CI (q13)}
+\label{sec-1-4}
+\subsubsection{q13 v q23}
+\label{sec-1-4-1}
+<<>>=
+(tq13q23 <- with(gp, table(q13, q23)))
+
+t(round(prop.table(tq13q23, margin = 1), 2))
+round(prop.table(tq13q23, margin = 2), 2)
+@ %def
+
+
+
+
+
+And\ldots{} one more time! STRONG association between ``small n wider'' to ``p value smaller'' responses; mild large to large and small to small associations.
 % Emacs 24.2.1 (Org mode 8.2.1)
 \end{document}
