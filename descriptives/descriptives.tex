@@ -1,4 +1,4 @@
-% Created 2013-12-27 Fri 03:06
+% Created 2014-01-02 Thu 10:50
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -36,7 +36,7 @@
 \label{sec-1}
 \begin{Schunk}
 \begin{Sinput}
-> library(car)
+> source("/home/fortis/goals-2013/functions.R")
 > gp.raw <- read.csv("/home/fortis/goals-2013/data-in/GOALS-DEIDENTIFIED-2013-12-20.csv")
 > ## Exclude non-consenting
 > summary(factor(gp.raw$consent)) ## no missing values; 38 nonconsenting, 1165 consenting
@@ -52,6 +52,7 @@
 > gp[,responsecols] <- lapply(gp[,responsecols], factor)
 > rwcols <- paste0(responsecols, ".rw")
 > gp.rw <- gp[, rwcols]
+> save(list = c("gp", "gp.rw"), file = "/home/fortis/goals-2013/data-in/g2013-clean.Rda")
 \end{Sinput}
 \end{Schunk}
 
@@ -123,7 +124,6 @@
 
 \begin{Schunk}
 \begin{Sinput}
-> library(corrgram)
 > corrgram(gp.rw, cex.labels = 1.5, lower.panel = panel.shade, upper.panel = panel.pie)
 \end{Sinput}
 \end{Schunk}
@@ -132,10 +132,9 @@
 Bivariate correlations seem generally quite low.  The mean/median item (q07) has among the largest number of substantially correlated items.  q09, the candies item, and q13, the CI/Sample size item, both have a lot of healthy intercorrelations.
 
 The Alice testlet seems to pop out quite separately from the other items\ldots{} we may be getting a very different group of students who do well on the Alice items than the others (but this conclusion should be taken with caution as it's based only on bivariate correlations).  It would be interesting to do some principle components on this.
-fdjksalf
+
 \begin{Schunk}
 \begin{Sinput}
-> library(ggplot2)
 > pc <- colMeans(gp.rw, na.rm = T)
 > round(pc, 2)
 \end{Sinput}

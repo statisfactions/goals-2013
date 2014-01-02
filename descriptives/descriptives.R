@@ -1,10 +1,10 @@
-### R code from vignette source 'descriptives.Rnw'
+### R code from vignette source '/home/fortis/goals-2013/descriptives/descriptives'
 ### Encoding: UTF-8
 
 ###################################################
 ### code chunk number 1: setup
 ###################################################
-library(car)
+source("/home/fortis/goals-2013/functions.R")
 
 gp.raw <- read.csv("/home/fortis/goals-2013/data-in/GOALS-DEIDENTIFIED-2013-12-20.csv")
 
@@ -19,9 +19,11 @@ gp[,responsecols] <- lapply(gp[,responsecols], factor)
 rwcols <- paste0(responsecols, ".rw")
 gp.rw <- gp[, rwcols]
 
+save(list = c("gp", "gp.rw"), file = "/home/fortis/goals-2013/data-in/g2013-clean.Rda")
+
 
 ###################################################
-### code chunk number 2: descriptives.Rnw:53-69
+### code chunk number 2: descriptives.Rnw:55-71
 ###################################################
 ## Add response options
 
@@ -42,7 +44,7 @@ gp$q12 <- factor(gp$q12, labels = c("Smaller variability", "Larger variability",
 
 
 ###################################################
-### code chunk number 3: descriptives.Rnw:74-75
+### code chunk number 3: descriptives.Rnw:76-77
 ###################################################
 table(gp$missing)
 
@@ -50,20 +52,17 @@ table(gp$missing)
 ###################################################
 ### code chunk number 4: corrgram
 ###################################################
-library(corrgram)
 corrgram(gp.rw, cex.labels = 1.5, lower.panel = panel.shade, upper.panel = panel.pie)
 
 
 ###################################################
 ### code chunk number 5: percentCorrect
 ###################################################
-library(ggplot2)
-
 pc <- colMeans(gp.rw, na.rm = T)
 round(pc, 2)
 
 names(pc) <- 1:23
-barplot(pc)
+barplot(pc, las = 2)
 
 
 ###################################################

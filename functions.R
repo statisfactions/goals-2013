@@ -1,4 +1,8 @@
 library(plyr)
+library(psych)
+library(car)
+library(ggplot2)
+library(corrgram)
 
 distractors <- function(qname, data) {
     ## Calculate proportion of each distractor for each total score level

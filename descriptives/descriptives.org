@@ -8,7 +8,7 @@
 
 * Setup
 #+BEGIN_SRC R :ravel setup
-  library(car)
+  source("/home/fortis/goals-2013/functions.R")
   
   gp.raw <- read.csv("/home/fortis/goals-2013/data-in/GOALS-DEIDENTIFIED-2013-12-20.csv")
   
@@ -22,6 +22,8 @@
   
   rwcols <- paste0(responsecols, ".rw")
   gp.rw <- gp[, rwcols]
+  
+  save(list = c("gp", "gp.rw"), file = "/home/fortis/goals-2013/data-in/g2013-clean.Rda")
   
 #+END_SRC
 
@@ -80,19 +82,14 @@ table(gp$missing)
 #+TBLFM: $1=@#-1
 
 #+BEGIN_SRC R :ravel corrgram,fig=TRUE
-  
-  library(corrgram)
   corrgram(gp.rw, cex.labels = 1.5, lower.panel = panel.shade, upper.panel = panel.pie)
-  
 #+END_SRC
 
 Bivariate correlations seem generally quite low.  The mean/median item (q07) has among the largest number of substantially correlated items.  q09, the candies item, and q13, the CI/Sample size item, both have a lot of healthy intercorrelations.
 
 The Alice testlet seems to pop out quite separately from the other items... we may be getting a very different group of students who do well on the Alice items than the others (but this conclusion should be taken with caution as it's based only on bivariate correlations).  It would be interesting to do some principle components on this.
-fdjksalf
+
 #+BEGIN_SRC R :ravel percentCorrect,fig=TRUE,width=9, height=6
-  library(ggplot2)
-  
   pc <- colMeans(gp.rw, na.rm = T)
   round(pc, 2)
   

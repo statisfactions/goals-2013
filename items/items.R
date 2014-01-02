@@ -1,11 +1,11 @@
-### R code from vignette source 'items/items.Rnw'
+### R code from vignette source '/home/fortis/goals-2013/items/items'
 ### Encoding: UTF-8
 
 ###################################################
 ### code chunk number 1: setup
 ###################################################
-source("/home/fortis/goals-2013/descriptives/descriptives.R")
-library(psych)
+source("/home/fortis/goals-2013/functions.R")
+load(file = "/home/fortis/goals-2013/data-in/g2013-clean.Rda")
 
 
 ###################################################

@@ -7,8 +7,9 @@
 #+LaTex_HEADER: \DeclareUnicodeCharacter{00A0}{~}
 
 #+BEGIN_SRC R :ravel setup
-  source("/home/fortis/goals-2013/descriptives/descriptives.R")
-  library(psych)
+  source("/home/fortis/goals-2013/functions.R")
+  load(file = "/home/fortis/goals-2013/data-in/g2013-clean.Rda")
+  
 #+END_SRC
 
 * Basic item analysis
