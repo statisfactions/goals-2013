@@ -19,11 +19,9 @@ gp[,responsecols] <- lapply(gp[,responsecols], factor)
 rwcols <- paste0(responsecols, ".rw")
 gp.rw <- gp[, rwcols]
 
-save(list = c("gp", "gp.rw"), file = "/home/fortis/goals-2013/data-in/g2013-clean.Rda")
-
 
 ###################################################
-### code chunk number 2: descriptives.Rnw:55-71
+### code chunk number 2: descriptives.Rnw:53-69
 ###################################################
 ## Add response options
 
@@ -44,19 +42,25 @@ gp$q12 <- factor(gp$q12, labels = c("Smaller variability", "Larger variability",
 
 
 ###################################################
-### code chunk number 3: descriptives.Rnw:76-77
+### code chunk number 3: descriptives.Rnw:72-73
+###################################################
+save(list = c("gp", "gp.rw"), file = "/home/fortis/goals-2013/data-in/g2013-clean.Rda")
+
+
+###################################################
+### code chunk number 4: descriptives.Rnw:78-79
 ###################################################
 table(gp$missing)
 
 
 ###################################################
-### code chunk number 4: corrgram
+### code chunk number 5: corrgram
 ###################################################
 corrgram(gp.rw, cex.labels = 1.5, lower.panel = panel.shade, upper.panel = panel.pie)
 
 
 ###################################################
-### code chunk number 5: percentCorrect
+### code chunk number 6: percentCorrect
 ###################################################
 pc <- colMeans(gp.rw, na.rm = T)
 round(pc, 2)
@@ -66,7 +70,7 @@ barplot(pc, las = 2)
 
 
 ###################################################
-### code chunk number 6: sample.size
+### code chunk number 7: sample.size
 ###################################################
 samps <- c("q06", "q09", "q13", "q23")
 samps.rw <- paste0(samps, ".rw")
@@ -76,7 +80,7 @@ round(cor(gp[,samps.rw], use = "complete.obs"), 2)
 
 
 ###################################################
-### code chunk number 7: central
+### code chunk number 8: central
 ###################################################
 cents <- c("q10", "q11")
 cents.rw <- paste0(cents, ".rw")
@@ -86,7 +90,7 @@ round(cor(gp[,cents.rw], use = "complete.obs"), 2)
 
 
 ###################################################
-### code chunk number 8: variability
+### code chunk number 9: variability
 ###################################################
 vars <- c("q08", "q12")
 vars.rw <- paste0(vars, ".rw")

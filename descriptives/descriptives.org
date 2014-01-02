@@ -22,9 +22,6 @@
   
   rwcols <- paste0(responsecols, ".rw")
   gp.rw <- gp[, rwcols]
-  
-  save(list = c("gp", "gp.rw"), file = "/home/fortis/goals-2013/data-in/g2013-clean.Rda")
-  
 #+END_SRC
 
 #+BEGIN_SRC R :revel recode
@@ -44,6 +41,10 @@
   
   gp$q08 <- factor(gp$q08, labels = c("Uniform", "Unimodal", "Neither"))
   gp$q12 <- factor(gp$q12, labels = c("Smaller variability", "Larger variability", "Same evidence"))
+#+END_SRC
+
+#+BEGIN_SRC R
+  save(list = c("gp", "gp.rw"), file = "/home/fortis/goals-2013/data-in/g2013-clean.Rda")
 #+END_SRC
 * Missing values
 #+BEGIN_SRC R
