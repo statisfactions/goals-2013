@@ -1,4 +1,4 @@
-% Created 2014-01-02 Thu 10:31
+% Created 2014-01-02 Thu 10:52
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -31,7 +31,8 @@
 
 \maketitle
 <<setup>>=
-source("/home/fortis/goals-2013/items/items.R")
+source("/home/fortis/goals-2013/functions.R")
+load(file = "/home/fortis/goals-2013/data-in/g2013-clean.Rda")
 @ %def
 
 \section{Distractor comparisons}

@@ -1,4 +1,4 @@
-% Created 2014-01-02 Thu 10:31
+% Created 2014-01-02 Thu 10:52
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -33,7 +33,8 @@
 \maketitle
 \begin{Schunk}
 \begin{Sinput}
-> source("/home/fortis/goals-2013/items/items.R")
+> source("/home/fortis/goals-2013/functions.R")
+> load(file = "/home/fortis/goals-2013/data-in/g2013-clean.Rda")
 \end{Sinput}
 \end{Schunk}
 
@@ -51,29 +52,29 @@
 > (tq06q09 <- with(gp, table(q06, q09)))
 \end{Sinput}
 \begin{Soutput}
-         q09
-q06       Same Small n is wider Large n is wider
-  Valid    307              409              126
-  Invalid   92              172               55
+   q09
+q06   1   2   3
+  1 307 409 126
+  2  92 172  55
 \end{Soutput}
 \begin{Sinput}
 > t(round(prop.table(tq06q09, margin = 1), 2))
 \end{Sinput}
 \begin{Soutput}
-                  q06
-q09                Valid Invalid
-  Same              0.36    0.29
-  Small n is wider  0.49    0.54
-  Large n is wider  0.15    0.17
+   q06
+q09    1    2
+  1 0.36 0.29
+  2 0.49 0.54
+  3 0.15 0.17
 \end{Soutput}
 \begin{Sinput}
 > round(prop.table(tq06q09, margin = 2), 2)
 \end{Sinput}
 \begin{Soutput}
-         q09
-q06       Same Small n is wider Large n is wider
-  Valid   0.77             0.70             0.70
-  Invalid 0.23             0.30             0.30
+   q09
+q06    1    2    3
+  1 0.77 0.70 0.70
+  2 0.23 0.30 0.30
 \end{Soutput}
 \end{Schunk}
 
@@ -85,29 +86,29 @@ Thinking that large and small sizes are the \textbf{same} on candies is actually
 > (tq06q13 <- with(gp, table(q06, q13)))
 \end{Sinput}
 \begin{Soutput}
-         q13
-q06       Small n is wider Large n is wider Same
-  Valid                400              287  147
-  Invalid              147              109   63
+   q13
+q06   1   2   3
+  1 400 287 147
+  2 147 109  63
 \end{Soutput}
 \begin{Sinput}
 > t(round(prop.table(tq06q13, margin = 1), 2))
 \end{Sinput}
 \begin{Soutput}
-                  q06
-q13                Valid Invalid
-  Small n is wider  0.48    0.46
-  Large n is wider  0.34    0.34
-  Same              0.18    0.20
+   q06
+q13    1    2
+  1 0.48 0.46
+  2 0.34 0.34
+  3 0.18 0.20
 \end{Soutput}
 \begin{Sinput}
 > round(prop.table(tq06q13, margin = 2), 2)
 \end{Sinput}
 \begin{Soutput}
-         q13
-q06       Small n is wider Large n is wider Same
-  Valid               0.73             0.72 0.70
-  Invalid             0.27             0.28 0.30
+   q13
+q06    1    2    3
+  1 0.73 0.72 0.70
+  2 0.27 0.28 0.30
 \end{Soutput}
 \end{Schunk}
 
@@ -119,29 +120,29 @@ All fairly close in \% terms.
 > (tq06q23 <- with(gp, table(q06, q23)))
 \end{Sinput}
 \begin{Soutput}
-         q23
-q06       Smaller than original Same as original Larger than original
-  Valid                     387              280                  173
-  Invalid                   132              115                   73
+   q23
+q06   1   2   3
+  1 387 280 173
+  2 132 115  73
 \end{Soutput}
 \begin{Sinput}
 > t(round(prop.table(tq06q23, margin = 1), 2))
 \end{Sinput}
 \begin{Soutput}
-                       q06
-q23                     Valid Invalid
-  Smaller than original  0.46    0.41
-  Same as original       0.33    0.36
-  Larger than original   0.21    0.23
+   q06
+q23    1    2
+  1 0.46 0.41
+  2 0.33 0.36
+  3 0.21 0.23
 \end{Soutput}
 \begin{Sinput}
 > round(prop.table(tq06q23, margin = 2), 2)
 \end{Sinput}
 \begin{Soutput}
-         q23
-q06       Smaller than original Same as original Larger than original
-  Valid                    0.75             0.71                 0.70
-  Invalid                  0.25             0.29                 0.30
+   q23
+q06    1    2    3
+  1 0.75 0.71 0.70
+  2 0.25 0.29 0.30
 \end{Soutput}
 \end{Schunk}
 
@@ -156,31 +157,31 @@ Mild association with the CORRECT answer.
 > (tq09q13 <- with(gp, table(q09, q13)))
 \end{Sinput}
 \begin{Soutput}
-                  q13
-q09                Small n is wider Large n is wider Same
-  Same                          140              157   98
-  Small n is wider              354              151   72
-  Large n is wider               54               87   39
+   q13
+q09   1   2   3
+  1 140 157  98
+  2 354 151  72
+  3  54  87  39
 \end{Soutput}
 \begin{Sinput}
 > t(round(prop.table(tq09q13, margin = 1), 2))
 \end{Sinput}
 \begin{Soutput}
-                  q09
-q13                Same Small n is wider Large n is wider
-  Small n is wider 0.35             0.61             0.30
-  Large n is wider 0.40             0.26             0.48
-  Same             0.25             0.12             0.22
+   q09
+q13    1    2    3
+  1 0.35 0.61 0.30
+  2 0.40 0.26 0.48
+  3 0.25 0.12 0.22
 \end{Soutput}
 \begin{Sinput}
 > round(prop.table(tq09q13, margin = 2), 2)
 \end{Sinput}
 \begin{Soutput}
-                  q13
-q09                Small n is wider Large n is wider Same
-  Same                         0.26             0.40 0.47
-  Small n is wider             0.65             0.38 0.34
-  Large n is wider             0.10             0.22 0.19
+   q13
+q09    1    2    3
+  1 0.26 0.40 0.47
+  2 0.65 0.38 0.34
+  3 0.10 0.22 0.19
 \end{Soutput}
 \end{Schunk}
 
@@ -194,31 +195,31 @@ STRONG association between ``small n wider'' responses; mild large to large and 
 > (tq09q23 <- with(gp, table(q09, q23)))
 \end{Sinput}
 \begin{Soutput}
-                  q23
-q09                Smaller than original Same as original Larger than original
-  Same                               150              163                   86
-  Small n is wider                   298              168                  114
-  Large n is wider                    70               63                   46
+   q23
+q09   1   2   3
+  1 150 163  86
+  2 298 168 114
+  3  70  63  46
 \end{Soutput}
 \begin{Sinput}
 > t(round(prop.table(tq09q23, margin = 1), 2))
 \end{Sinput}
 \begin{Soutput}
-                       q09
-q23                     Same Small n is wider Large n is wider
-  Smaller than original 0.38             0.51             0.39
-  Same as original      0.41             0.29             0.35
-  Larger than original  0.22             0.20             0.26
+   q09
+q23    1    2    3
+  1 0.38 0.51 0.39
+  2 0.41 0.29 0.35
+  3 0.22 0.20 0.26
 \end{Soutput}
 \begin{Sinput}
 > round(prop.table(tq09q23, margin = 2), 2)
 \end{Sinput}
 \begin{Soutput}
-                  q23
-q09                Smaller than original Same as original Larger than original
-  Same                              0.29             0.41                 0.35
-  Small n is wider                  0.58             0.43                 0.46
-  Large n is wider                  0.14             0.16                 0.19
+   q23
+q09    1    2    3
+  1 0.29 0.41 0.35
+  2 0.58 0.43 0.46
+  3 0.14 0.16 0.19
 \end{Soutput}
 \end{Schunk}
 
@@ -237,31 +238,31 @@ Similarly, STRONG association between ``small n wider'' responses; mild large to
 > (tq13q23 <- with(gp, table(q13, q23)))
 \end{Sinput}
 \begin{Soutput}
-                  q23
-q13                Smaller than original Same as original Larger than original
-  Small n is wider                   312              149                   85
-  Large n is wider                   133              151                  110
-  Same                                70               92                   48
+   q23
+q13   1   2   3
+  1 312 149  85
+  2 133 151 110
+  3  70  92  48
 \end{Soutput}
 \begin{Sinput}
 > t(round(prop.table(tq13q23, margin = 1), 2))
 \end{Sinput}
 \begin{Soutput}
-                       q13
-q23                     Small n is wider Large n is wider Same
-  Smaller than original             0.57             0.34 0.33
-  Same as original                  0.27             0.38 0.44
-  Larger than original              0.16             0.28 0.23
+   q13
+q23    1    2    3
+  1 0.57 0.34 0.33
+  2 0.27 0.38 0.44
+  3 0.16 0.28 0.23
 \end{Soutput}
 \begin{Sinput}
 > round(prop.table(tq13q23, margin = 2), 2)
 \end{Sinput}
 \begin{Soutput}
-                  q23
-q13                Smaller than original Same as original Larger than original
-  Small n is wider                  0.61             0.38                 0.35
-  Large n is wider                  0.26             0.39                 0.45
-  Same                              0.14             0.23                 0.20
+   q23
+q13    1    2    3
+  1 0.61 0.38 0.35
+  2 0.26 0.39 0.45
+  3 0.14 0.23 0.20
 \end{Soutput}
 \end{Schunk}
 
