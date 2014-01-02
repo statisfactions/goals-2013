@@ -1,0 +1,93 @@
+% Created 2014-01-01 Wed 21:37
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage[cm]{fullpage}
+\pagestyle{empty}
+\thispagestyle{empty}
+\DeclareUnicodeCharacter{00A0}{~}
+\author{Ethan Brown}
+\date{\today}
+\title{Goals 2013 Item analysis}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.2.1 (Org mode 8.2.1)}}
+\usepackage{Sweave}
+\begin{document}
+
+\maketitle
+\begin{Schunk}
+\begin{Sinput}
+> source("/home/fortis/goals-2013/items/items.R")
+\end{Sinput}
+\end{Schunk}
+
+\section{Distractor mosaics}
+\label{sec-1}
+
+\subsection{Herbicide (q06)}
+\label{sec-1-1}
+Overall, it seems the \emph{only} convincing bivariate associations between these variables is the big difference for correct answers.  Errors do not seem particularly diagnostic of each other, which is consistent with findings from my poster and the fact that incorrect answers will tend to be based on intuitions, and the intuitions will be likely to vary between these four very different contexts and representations, despite their formal equivalence.
+
+
+\begin{Schunk}
+\begin{Sinput}
+> mosaicplot(with(gp, table(q06, q09)), color=T)
+\end{Sinput}
+\end{Schunk}
+\includegraphics{comparisons-002}
+
+\begin{Schunk}
+\begin{Sinput}
+> mosaicplot(with(gp, table(q06, q13)), color=T)
+\end{Sinput}
+\end{Schunk}
+\includegraphics{comparisons-003}
+
+\begin{Schunk}
+\begin{Sinput}
+> mosaicplot(with(gp, table(q06, q23)), color=T)
+\end{Sinput}
+\end{Schunk}
+\includegraphics{comparisons-004}
+\subsection{Candies (q09)}
+\label{sec-1-2}
+
+\begin{Schunk}
+\begin{Sinput}
+> mosaicplot(with(gp, table(q09, q13)), color=T)
+\end{Sinput}
+\end{Schunk}
+\includegraphics{comparisons-005}
+
+\begin{Schunk}
+\begin{Sinput}
+> mosaicplot(with(gp, table(q09, q23)), color=T)
+\end{Sinput}
+\end{Schunk}
+\includegraphics{comparisons-006}
+\subsection{CI (q13)}
+\label{sec-1-3}
+\begin{Schunk}
+\begin{Sinput}
+> mosaicplot(with(gp, table(q13, q23)), color=T)
+\end{Sinput}
+\end{Schunk}
+\includegraphics{comparisons-007}
+% Emacs 24.2.1 (Org mode 8.2.1)
+\end{document}
