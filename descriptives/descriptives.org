@@ -106,7 +106,7 @@ The Alice testlet seems to pop out quite separately from the other items... we m
 
 ** Sample size
 | *Items* | *Gloss*                                           |
-|---------+-----------------------------sweave change figure size----------------------|
+|---------+---------------------------------------------------|
 |       6 | Herbicide: sample size may be why not significant |
 |       9 | Candies problem (visual)                          |
 |      13 | CI/Sample size                                    |
