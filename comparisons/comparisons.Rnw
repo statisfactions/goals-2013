@@ -1,4 +1,4 @@
-% Created 2014-01-02 Thu 12:56
+% Created 2014-01-02 Thu 13:50
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -35,15 +35,12 @@ source("/home/fortis/goals-2013/functions.R")
 load(file = "/home/fortis/goals-2013/data-in/g2013-clean.Rda")
 @ %def
 
-\section{Distractor comparisons}
+\section{{\bfseries\sffamily TODO} Run Chi-sq on these?}
 \label{sec-1}
-
-\subsection{{\bfseries\sffamily TODO} Run Chi-sq on these?}
-\label{sec-1-1}
-\subsection{Herbicide (q06)}
-\label{sec-1-2}
-\subsubsection{q06 v q09}
-\label{sec-1-2-1}
+\section{Herbicide (q06)}
+\label{sec-2}
+\subsection{q06 v q09}
+\label{sec-2-1}
 <<>>=
 (tq06q09 <- with(gp, table(q06, q09)))
 
@@ -52,8 +49,8 @@ round(prop.table(tq06q09, margin = 2), 2)
 @ %def
 
 Thinking that large and small sizes are the \textbf{same} on candies is actually mildly associated with getting the correct answer on Herbicide!  Those who thought large n or small n is wider were a bit less likely to get the item correct.
-\subsubsection{q06 v q13}
-\label{sec-1-2-2}
+\subsection{q06 v q13}
+\label{sec-2-2}
 <<>>=
 (tq06q13 <- with(gp, table(q06, q13)))
 
@@ -62,8 +59,8 @@ round(prop.table(tq06q13, margin = 2), 2)
 @ %def
 
 All fairly close in \% terms.
-\subsubsection{q06 v q23}
-\label{sec-1-2-3}
+\subsection{q06 v q23}
+\label{sec-2-3}
 <<>>=
 (tq06q23 <- with(gp, table(q06, q23)))
 
@@ -73,10 +70,10 @@ round(prop.table(tq06q23, margin = 2), 2)
 
 Mild association with the CORRECT answer.
 
-\subsection{Candies (q09)}
-\label{sec-1-3}
-\subsubsection{q09 v q13}
-\label{sec-1-3-1}
+\section{Candies (q09)}
+\label{sec-3}
+\subsection{q09 v q13}
+\label{sec-3-1}
 <<>>=
 (tq09q13 <- with(gp, table(q09, q13)))
 
@@ -87,8 +84,8 @@ round(prop.table(tq09q13, margin = 2), 2)
 
 STRONG association between ``small n wider'' responses; mild large to large and small to small associations.
 
-\subsubsection{q09 v q23}
-\label{sec-1-3-2}
+\subsection{q09 v q23}
+\label{sec-3-2}
 <<>>=
 (tq09q23 <- with(gp, table(q09, q23)))
 
@@ -102,10 +99,10 @@ round(prop.table(tq09q23, margin = 2), 2)
 
 Similarly, STRONG association between ``small n wider'' responses; mild large to large and small to small associations.
 
-\subsection{CI (q13)}
-\label{sec-1-4}
-\subsubsection{q13 v q23}
-\label{sec-1-4-1}
+\section{CI (q13)}
+\label{sec-4}
+\subsection{q13 v q23}
+\label{sec-4-1}
 <<>>=
 (tq13q23 <- with(gp, table(q13, q23)))
 
@@ -118,5 +115,45 @@ round(prop.table(tq13q23, margin = 2), 2)
 
 
 And\ldots{} one more time! STRONG association between ``small n wider'' to ``p value smaller'' responses; mild large to large and small to small associations.
+
+\section{``Small n wider'' correlations}
+\label{sec-5}
+(This is also in the descriptives file.)
+
+<<small.corr>>=
+allsamps <- c("q06", "q09", "q13", "q23")
+allsamps.rw <- paste0(allsamps, ".rw")
+
+round(cor(gp[,allsamps.rw], use = "complete.obs"), 2)
+@ %def
+
+\section{"Same" correlations}
+\label{sec-6}
+
+<<same.corr>>=
+samps3 <- allsamps[-1]
+
+same <- data.frame(lapply(gp[,samps3], function(x) {
+    out <- rep(FALSE, length(x))
+    out[is.na(x)] <- NA
+    out[grep("^Same", x)] <- TRUE
+    out
+}))
+
+round(cor(same, use = "complete.obs"), 2)
+@ %def
+
+\section{``Larger n wider'' correlations}
+\label{sec-7}
+<<larger.corr>>=
+larger <- data.frame(lapply(gp[,samps3], function(x) {
+    out <- rep(FALSE, length(x))
+    out[is.na(x)] <- NA
+    out[grep("^Large", x)] <- TRUE
+    out
+}))
+
+round(cor(larger, use = "complete.obs"), 2)
+@ %def
 % Emacs 24.2.1 (Org mode 8.2.1)
 \end{document}

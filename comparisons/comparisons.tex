@@ -1,4 +1,4 @@
-% Created 2014-01-02 Thu 12:56
+% Created 2014-01-02 Thu 13:50
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -38,15 +38,12 @@
 \end{Sinput}
 \end{Schunk}
 
-\section{Distractor comparisons}
+\section{{\bfseries\sffamily TODO} Run Chi-sq on these?}
 \label{sec-1}
-
-\subsection{{\bfseries\sffamily TODO} Run Chi-sq on these?}
-\label{sec-1-1}
-\subsection{Herbicide (q06)}
-\label{sec-1-2}
-\subsubsection{q06 v q09}
-\label{sec-1-2-1}
+\section{Herbicide (q06)}
+\label{sec-2}
+\subsection{q06 v q09}
+\label{sec-2-1}
 \begin{Schunk}
 \begin{Sinput}
 > (tq06q09 <- with(gp, table(q06, q09)))
@@ -79,8 +76,8 @@ q06       Same Small n is wider Large n is wider
 \end{Schunk}
 
 Thinking that large and small sizes are the \textbf{same} on candies is actually mildly associated with getting the correct answer on Herbicide!  Those who thought large n or small n is wider were a bit less likely to get the item correct.
-\subsubsection{q06 v q13}
-\label{sec-1-2-2}
+\subsection{q06 v q13}
+\label{sec-2-2}
 \begin{Schunk}
 \begin{Sinput}
 > (tq06q13 <- with(gp, table(q06, q13)))
@@ -113,8 +110,8 @@ q06       Small n is wider Large n is wider Same
 \end{Schunk}
 
 All fairly close in \% terms.
-\subsubsection{q06 v q23}
-\label{sec-1-2-3}
+\subsection{q06 v q23}
+\label{sec-2-3}
 \begin{Schunk}
 \begin{Sinput}
 > (tq06q23 <- with(gp, table(q06, q23)))
@@ -148,10 +145,10 @@ q06       Smaller than original Same as original Larger than original
 
 Mild association with the CORRECT answer.
 
-\subsection{Candies (q09)}
-\label{sec-1-3}
-\subsubsection{q09 v q13}
-\label{sec-1-3-1}
+\section{Candies (q09)}
+\label{sec-3}
+\subsection{q09 v q13}
+\label{sec-3-1}
 \begin{Schunk}
 \begin{Sinput}
 > (tq09q13 <- with(gp, table(q09, q13)))
@@ -188,8 +185,8 @@ q09                Small n is wider Large n is wider Same
 
 STRONG association between ``small n wider'' responses; mild large to large and small to small associations.
 
-\subsubsection{q09 v q23}
-\label{sec-1-3-2}
+\subsection{q09 v q23}
+\label{sec-3-2}
 \begin{Schunk}
 \begin{Sinput}
 > (tq09q23 <- with(gp, table(q09, q23)))
@@ -229,10 +226,10 @@ q09                Smaller than original Same as original Larger than original
 
 Similarly, STRONG association between ``small n wider'' responses; mild large to large and small to small associations.
 
-\subsection{CI (q13)}
-\label{sec-1-4}
-\subsubsection{q13 v q23}
-\label{sec-1-4-1}
+\section{CI (q13)}
+\label{sec-4}
+\subsection{q13 v q23}
+\label{sec-4-1}
 \begin{Schunk}
 \begin{Sinput}
 > (tq13q23 <- with(gp, table(q13, q23)))
@@ -271,5 +268,66 @@ q13                Smaller than original Same as original Larger than original
 
 
 And\ldots{} one more time! STRONG association between ``small n wider'' to ``p value smaller'' responses; mild large to large and small to small associations.
+
+\section{``Small n wider'' correlations}
+\label{sec-5}
+(This is also in the descriptives file.)
+
+\begin{Schunk}
+\begin{Sinput}
+> allsamps <- c("q06", "q09", "q13", "q23")
+> allsamps.rw <- paste0(allsamps, ".rw")
+> round(cor(gp[,allsamps.rw], use = "complete.obs"), 2)
+\end{Sinput}
+\begin{Soutput}
+       q06.rw q09.rw q13.rw q23.rw
+q06.rw   1.00  -0.04   0.02   0.04
+q09.rw  -0.04   1.00   0.28   0.13
+q13.rw   0.02   0.28   1.00   0.24
+q23.rw   0.04   0.13   0.24   1.00
+\end{Soutput}
+\end{Schunk}
+
+\section{"Same" correlations}
+\label{sec-6}
+
+\begin{Schunk}
+\begin{Sinput}
+> samps3 <- allsamps[-1]
+> same <- data.frame(lapply(gp[,samps3], function(x) {
++     out <- rep(FALSE, length(x))
++     out[is.na(x)] <- NA
++     out[grep("^Same", x)] <- TRUE
++     out
++ }))
+> round(cor(same, use = "complete.obs"), 2)
+\end{Sinput}
+\begin{Soutput}
+     q09  q13  q23
+q09 1.00 0.12 0.10
+q13 0.12 1.00 0.09
+q23 0.10 0.09 1.00
+\end{Soutput}
+\end{Schunk}
+
+\section{``Larger n wider'' correlations}
+\label{sec-7}
+\begin{Schunk}
+\begin{Sinput}
+> larger <- data.frame(lapply(gp[,samps3], function(x) {
++     out <- rep(FALSE, length(x))
++     out[is.na(x)] <- NA
++     out[grep("^Large", x)] <- TRUE
++     out
++ }))
+> round(cor(larger, use = "complete.obs"), 2)
+\end{Sinput}
+\begin{Soutput}
+     q09  q13  q23
+q09 1.00 0.13 0.04
+q13 0.13 1.00 0.12
+q23 0.04 0.12 1.00
+\end{Soutput}
+\end{Schunk}
 % Emacs 24.2.1 (Org mode 8.2.1)
 \end{document}

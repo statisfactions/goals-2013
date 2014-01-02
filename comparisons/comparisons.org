@@ -11,11 +11,9 @@
   load(file = "/home/fortis/goals-2013/data-in/g2013-clean.Rda")
 #+END_SRC
 
-* Distractor comparisons
-
-** TODO Run Chi-sq on these?
-** Herbicide (q06)
-*** q06 v q09
+* TODO Run Chi-sq on these?
+* Herbicide (q06)
+** q06 v q09
 #+BEGIN_SRC R
   (tq06q09 <- with(gp, table(q06, q09)))
   
@@ -27,7 +25,7 @@
 
 Thinking that large and small sizes are the *same* on candies is actually mildly associated with getting the correct answer on Herbicide!  Those who thought large n or small n is wider were a bit less likely to get the item correct.
 
-*** q06 v q13
+** q06 v q13
 #+BEGIN_SRC R
   (tq06q13 <- with(gp, table(q06, q13)))
   
@@ -39,7 +37,7 @@ Thinking that large and small sizes are the *same* on candies is actually mildly
 
 All fairly close in \% terms.
 
-*** q06 v q23
+** q06 v q23
 #+BEGIN_SRC R
   (tq06q23 <- with(gp, table(q06, q23)))
   
@@ -50,8 +48,8 @@ All fairly close in \% terms.
 #+END_SRC
 
 Mild association with the CORRECT answer.
-** Candies (q09)
-*** q09 v q13
+* Candies (q09)
+** q09 v q13
 #+BEGIN_SRC R
   (tq09q13 <- with(gp, table(q09, q13)))
   
@@ -63,7 +61,7 @@ Mild association with the CORRECT answer.
 
 
 STRONG association between ``small n wider'' responses; mild large to large and small to small associations.
-*** q09 v q23
+** q09 v q23
 #+BEGIN_SRC R
   (tq09q23 <- with(gp, table(q09, q23)))
   
@@ -78,8 +76,8 @@ STRONG association between ``small n wider'' responses; mild large to large and 
 
 
 Similarly, STRONG association between ``small n wider'' responses; mild large to large and small to small associations.
-** CI (q13)
-*** q13 v q23
+* CI (q13)
+** q13 v q23
 #+BEGIN_SRC R
   (tq13q23 <- with(gp, table(q13, q23)))
   
@@ -94,3 +92,37 @@ Similarly, STRONG association between ``small n wider'' responses; mild large to
 
 
 And... one more time! STRONG association between ``small n wider'' to ``p value smaller'' responses; mild large to large and small to small associations.
+* ``Small n wider'' correlations
+(This is also in the descriptives file.)
+
+#+BEGIN_SRC R :ravel small.corr
+  allsamps <- c("q06", "q09", "q13", "q23")
+  allsamps.rw <- paste0(allsamps, ".rw")
+  
+  round(cor(gp[,allsamps.rw], use = "complete.obs"), 2)
+#+END_SRC
+* "Same" correlations
+
+#+BEGIN_SRC R :ravel same.corr
+  samps3 <- allsamps[-1]
+  
+  same <- data.frame(lapply(gp[,samps3], function(x) {
+      out <- rep(FALSE, length(x))
+      out[is.na(x)] <- NA
+      out[grep("^Same", x)] <- TRUE
+      out
+  }))
+  
+  round(cor(same, use = "complete.obs"), 2)
+#+END_SRC
+* ``Larger n wider'' correlations
+#+BEGIN_SRC R :ravel larger.corr
+  larger <- data.frame(lapply(gp[,samps3], function(x) {
+      out <- rep(FALSE, length(x))
+      out[is.na(x)] <- NA
+      out[grep("^Large", x)] <- TRUE
+      out
+  }))
+
+  round(cor(larger, use = "complete.obs"), 2)
+#+END_SRC
